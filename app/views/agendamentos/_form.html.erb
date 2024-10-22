@@ -1,0 +1,42 @@
+<%= form_with(model: agendamento) do |form| %>
+  <% if agendamento.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(agendamento.errors.count, "error") %> prohibited this agendamento from being saved:</h2>
+
+      <ul>
+        <% agendamento.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :cliente_id, style: "display: block" %>
+    <%= form.text_field :cliente_id %>
+  </div>
+
+  <div>
+    <%= form.label :consultor_id, style: "display: block" %>
+    <%= form.text_field :consultor_id %>
+  </div>
+
+  <div>
+    <%= form.label :data, style: "display: block" %>
+    <%= form.date_field :data %>
+  </div>
+
+  <div>
+    <%= form.label :hora_inicio, style: "display: block" %>
+    <%= form.time_field :hora_inicio %>
+  </div>
+
+  <div>
+    <%= form.label :hora_fim, style: "display: block" %>
+    <%= form.time_field :hora_fim %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module DisponibilidadeConsultorsHelper
+end

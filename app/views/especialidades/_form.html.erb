@@ -1,0 +1,27 @@
+<%= form_with(model: especialidade) do |form| %>
+  <% if especialidade.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(especialidade.errors.count, "error") %> prohibited this especialidade from being saved:</h2>
+
+      <ul>
+        <% especialidade.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :descricao, style: "display: block" %>
+    <%= form.text_field :descricao %>
+  </div>
+
+  <div>
+    <%= form.label :area_id, style: "display: block" %>
+    <%= form.text_field :area_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

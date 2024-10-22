@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  consultor: one
+  data: 2024-10-21
+  hora_inicio: 2024-10-21 20:52:42
+  hora_fim: 2024-10-21 20:52:42
+
+two:
+  consultor: two
+  data: 2024-10-21
+  hora_inicio: 2024-10-21 20:52:42
+  hora_fim: 2024-10-21 20:52:42

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Disponibilidade consultors</h1>
+
+<div id="disponibilidade_consultors">
+  <% @disponibilidade_consultors.each do |disponibilidade_consultor| %>
+    <%= render disponibilidade_consultor %>
+    <p>
+      <%= link_to "Show this disponibilidade consultor", disponibilidade_consultor %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New disponibilidade consultor", new_disponibilidade_consultor_path %>

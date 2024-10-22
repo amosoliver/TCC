@@ -1,0 +1,37 @@
+<%= form_with(model: disponibilidade_consultor) do |form| %>
+  <% if disponibilidade_consultor.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(disponibilidade_consultor.errors.count, "error") %> prohibited this disponibilidade_consultor from being saved:</h2>
+
+      <ul>
+        <% disponibilidade_consultor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :consultor_id, style: "display: block" %>
+    <%= form.text_field :consultor_id %>
+  </div>
+
+  <div>
+    <%= form.label :data, style: "display: block" %>
+    <%= form.date_field :data %>
+  </div>
+
+  <div>
+    <%= form.label :hora_inicio, style: "display: block" %>
+    <%= form.time_field :hora_inicio %>
+  </div>
+
+  <div>
+    <%= form.label :hora_fim, style: "display: block" %>
+    <%= form.time_field :hora_fim %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

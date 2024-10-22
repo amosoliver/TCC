@@ -1,0 +1,1 @@
+json.partial! "disponibilidade_consultors/disponibilidade_consultor", disponibilidade_consultor: @disponibilidade_consultor
