@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, only: %i[ sessions ]
   resources :users
   get 'home/index'
   resources :agendamentos
