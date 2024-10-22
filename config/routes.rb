@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users
+  resources :users
   get 'home/index'
   resources :agendamentos
   resources :disponibilidade_consultors
-  devise_for :users
   resources :cidades
   resources :especialidades
   resources :areas
