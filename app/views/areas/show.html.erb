@@ -1,20 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
 
-<h1>Especialidades</h1>
-
-<div id="especialidades" class="row"> <!-- Adicione a classe 'row' aqui -->
-  <% @especialidades.each do |especialidade| %>
-    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in" data-aos-delay="100">
-      <div class="icon-box">
-        <div class="icon"><i class="bx bxl-dribbble"></i></div> <!-- Você pode substituir o ícone conforme necessário -->
-        <h4><a href="<%= especialidade_path(especialidade) %>"><%= especialidade.descricao %></a></h4>
-        <p><%= especialidade.descricao %></p>
-      </div>
+    <div class="section-title">
+      <h2><%= @area.descricao %></h2> <!-- Exibe o area_id no título -->
     </div>
-  <% end %>
-</div>
+
+    <div class="row">
+      <% @especialidades.each do |especialidade| %>
+        <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box">
+            <div class="icon"><i class="bx bxl-dribbble"></i></div>
+            <h4><a href="<%= especialidade_path(especialidade) %>"><%= especialidade.descricao %></a></h4>
+            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
 
 <%= link_to "New especialidade", new_especialidade_path, class: 'btn btn-primary' %> <!-- Adicionei uma classe para estilizar o botão -->
-
-<!-- Botão para voltar ao topo -->
-<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

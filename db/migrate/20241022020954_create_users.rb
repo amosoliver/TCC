@@ -9,7 +9,9 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.boolean :consultor
       t.integer :especialidade_id
       t.integer :cidade_id
-
+      t.string :nome      # Adicionando campo nome
+      t.text :descricao   # Adicionando campo descrição
+      t.string :foto      # Adicionando campo foto
       t.timestamps
     end
   end

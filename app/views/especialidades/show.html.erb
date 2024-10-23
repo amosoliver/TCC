@@ -1,19 +1,26 @@
-<p style="color: green"><%= notice %></p>
 
-<h1>Consultores</h1>
 
-<div id="consultores" class="row"> <!-- Adicione a classe 'row' aqui -->
-  <% @consultores.each do |consultore| %>
-    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in" data-aos-delay="100">
-      <div class="icon-box">
-        <div class="icon"><i class="bx bxl-dribbble"></i></div> <!-- Você pode substituir o ícone conforme necessário -->
-        <h4><a href="<%= user_path(consultore) %>"><%= consultore.nome %></a></h4>
-        <p><%= consultore.nome %></p>
+
+
+   <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>consultores</h2>
+        </div>
+
+        <div class="row">
+           <% @consultores.each do |consultore| %>
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+             <h4><a href="<%= user_path(consultore) %>"><%= consultore.nome %></a></h4>
+              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+            </div>
+          </div>
+            <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    </section>  
 
 
-<!-- Botão para voltar ao topo -->
-<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
