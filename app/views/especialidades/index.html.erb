@@ -2,13 +2,19 @@
 
 <h1>Especialidades</h1>
 
-<div id="especialidades">
+<div id="especialidades" class="row"> <!-- Adicione a classe 'row' aqui -->
   <% @especialidades.each do |especialidade| %>
-    <%= render especialidade %>
-    <p>
-      <%= link_to "Show this especialidade", especialidade %>
-    </p>
+    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in" data-aos-delay="100">
+      <div class="icon-box">
+        <div class="icon"><i class="bx bxl-dribbble"></i></div> <!-- Você pode substituir o ícone conforme necessário -->
+        <h4><a href="<%= especialidade_path(especialidade) %>"><%= especialidade.descricao %></a></h4>
+        <p><%= especialidade.descricao %></p>
+      </div>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New especialidade", new_especialidade_path %>
+<%= link_to "New especialidade", new_especialidade_path, class: 'btn btn-primary' %> <!-- Adicionei uma classe para estilizar o botão -->
+
+<!-- Botão para voltar ao topo -->
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_22_020954) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_23_005616) do
   create_table "agendamentos", force: :cascade do |t|
     t.integer "cliente_id"
     t.integer "consultor_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_22_020954) do
     t.string "descricao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "icone"
   end
 
   create_table "cidades", force: :cascade do |t|
@@ -50,6 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_22_020954) do
     t.integer "area_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "icone"
     t.index ["area_id"], name: "index_especialidades_on_area_id"
   end
 
@@ -64,6 +66,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_22_020954) do
     t.integer "cidade_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "foto"
+    t.string "nome"
   end
 
   add_foreign_key "agendamentos", "users", column: "cliente_id"

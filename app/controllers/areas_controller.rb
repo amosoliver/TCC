@@ -8,6 +8,7 @@ class AreasController < ApplicationController
 
   # GET /areas/1 or /areas/1.json
   def show
+    @especialidades = Especialidade.where(area_id: @area.id)
   end
 
   # GET /areas/new
