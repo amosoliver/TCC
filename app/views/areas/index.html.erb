@@ -1,25 +1,21 @@
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Areas</h2>
+    </div>
 
-
-   <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2><%@areas.especialidade%></h2>
-        </div>
-
-        <div class="row">
-           <% @areas.each do |area| %>
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-             <h4><a href="<%= area_path(area) %>"><%= area.descricao %></a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
+    <div class="row">
+      <% @areas.each do |area| %>
+        <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box">
+            <div class="icon"><i class="bx bxl-dribbble"></i></div>
+            <h4><a href="<%= area_path(area) %>"><%= area.nome %></a></h4>
+            <p><%= area.descricao %></p>
           </div>
-            <% end %>
         </div>
-      </div>
-    </section>  
+      <% end %>
+    </div>
+  </div>
+</section>
 
-    <%= link_to "New area", new_area_path, class: 'btn btn-primary' %> <!-- Adicionei uma classe para estilizar o botão -->
-
+<%= link_to "New area", new_area_path, class: 'btn btn-primary' %>
