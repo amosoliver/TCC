@@ -68,6 +68,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def especialidade_params
-      params.require(:especialidade).permit(:descricao, :area_id)
+      params.require(:especialidade).permit(:nome,:descricao, :area_id)
     end
 end

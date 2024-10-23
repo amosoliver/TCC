@@ -66,6 +66,6 @@ class AreasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def area_params
-      params.require(:area).permit(:descricao)
+      params.require(:area).permit(:descricao,:nome)
     end
 end

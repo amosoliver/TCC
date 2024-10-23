@@ -1,80 +1,43 @@
-# This file is auto-generated from the current state of the database. Instead
-# of editing this file, please use the migrations feature of Active Record to
-# incrementally modify your database, and then regenerate this schema definition.
-#
-# This file is the source Rails uses to define your schema when running `bin/rails
-# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
-# be faster and is potentially less error prone than running all of your
-# migrations from scratch. Old migrations may fail to apply correctly if those
-# migrations use external dependencies or application code.
-#
-# It's strongly recommended that you check this file into your version control system.
+# db/seeds.rb
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_22_020954) do
-  create_table "agendamentos", force: :cascade do |t|
-    t.integer "cliente_id"
-    t.integer "consultor_id"
-    t.date "data"
-    t.time "hora_inicio"
-    t.time "hora_fim"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cliente_id"], name: "index_agendamentos_on_cliente_id"
-    t.index ["consultor_id"], name: "index_agendamentos_on_consultor_id"
-  end
+# Criar áreas
+areas = Area.create!([
+  { nome: 'Saúde', descricao: 'Área de saúde e bem-estar', icone: 'saude.png' },
+  { nome: 'Educação', descricao: 'Área de ensino e aprendizagem', icone: 'educacao.png' },
+  { nome: 'Tecnologia', descricao: 'Área de tecnologia e inovação', icone: 'tecnologia.png' }
+])
 
-  create_table "areas", force: :cascade do |t|
-    t.string "nome"
-    t.string "descricao"
-    t.string "icone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+# Criar cidades
+cidades = Cidade.create!([
+  { descricao: 'São Paulo' },
+  { descricao: 'Rio de Janeiro' },
+  { descricao: 'Belo Horizonte' }
+])
 
-  create_table "cidades", force: :cascade do |t|
-    t.string "descricao"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+# Criar especialidades
+especialidades = Especialidade.create!([
+  { nome: 'Médico', descricao: 'Profissional de saúde', area_id: areas[0].id, icone: 'medico.png' },
+  { nome: 'Professor', descricao: 'Educador em diversas disciplinas', area_id: areas[1].id, icone: 'professor.png' },
+  { nome: 'Desenvolvedor', descricao: 'Especialista em desenvolvimento de software', area_id: areas[2].id, icone: 'desenvolvedor.png' }
+])
 
-  create_table "disponibilidade_consultors", force: :cascade do |t|
-    t.integer "consultor_id"
-    t.date "data"
-    t.time "hora_inicio"
-    t.time "hora_fim"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["consultor_id"], name: "index_disponibilidade_consultors_on_consultor_id"
-  end
+# Criar usuários (consultores)
+users = User.create!([
+  { email: 'consultor1@example.com', encrypted_password: 'password', consultor: true, especialidade_id: especialidades[0].id, cidade_id: cidades[0].id, nome: 'Consultor 1', descricao: 'Especialista em saúde', foto: 'consultor1.png' },
+  { email: 'consultor2@example.com', encrypted_password: 'password', consultor: true, especialidade_id: especialidades[1].id, cidade_id: cidades[1].id, nome: 'Consultor 2', descricao: 'Especialista em educação', foto: 'consultor2.png' },
+  { email: 'consultor3@example.com', encrypted_password: 'password', consultor: true, especialidade_id: especialidades[2].id, cidade_id: cidades[2].id, nome: 'Consultor 3', descricao: 'Especialista em tecnologia', foto: 'consultor3.png' }
+])
 
-  create_table "especialidades", force: :cascade do |t|
-    t.string "nome"
-    t.string "descricao"
-    t.integer "area_id", null: false
-    t.string "icone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_especialidades_on_area_id"
-  end
+# Criar agendamentos
+Agendamento.create!([
+  { cliente_id: users[0].id, consultor_id: users[1].id, data: '2024-10-30', hora_inicio: '10:00', hora_fim: '11:00' },
+  { cliente_id: users[0].id, consultor_id: users[2].id, data: '2024-10-31', hora_inicio: '14:00', hora_fim: '15:00' }
+])
 
-  create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "encrypted_password"
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.boolean "consultor"
-    t.integer "especialidade_id"
-    t.integer "cidade_id"
-    t.string "nome"
-    t.text "descricao"
-    t.string "foto"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+# Criar disponibilidade de consultores
+DisponibilidadeConsultor.create!([
+  { consultor_id: users[1].id, data: '2024-10-30', hora_inicio: '09:00', hora_fim: '12:00' },
+  { consultor_id: users[2].id, data: '2024-10-31', hora_inicio: '13:00', hora_fim: '16:00' }
+])
 
-  add_foreign_key "agendamentos", "users", column: "cliente_id"
-  add_foreign_key "agendamentos", "users", column: "consultor_id"
-  add_foreign_key "disponibilidade_consultors", "users", column: "consultor_id"
-  add_foreign_key "especialidades", "areas"
-end
+puts "Dados de exemplo criados com sucesso!"
