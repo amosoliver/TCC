@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # Associação para a especialidade
+  belongs_to :especialidade, optional: true
+
   # Associação para clientes
   has_many :agendamentos, foreign_key: 'cliente_id', class_name: 'Agendamento'
   
@@ -14,5 +17,5 @@ class User < ApplicationRecord
   end
 
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable
 end

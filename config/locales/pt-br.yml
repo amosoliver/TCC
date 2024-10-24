@@ -1,0 +1,57 @@
+pt-BR:
+  activerecord:
+    models:
+      Agendamento: "Agendamento"
+      Area: "Área"
+      Cidade: "Cidade"
+      DisponibilidadeConsultor: "Disponibilidade do Consultor"
+      Especialidade: "Especialidade"
+      User: "Usuário"
+
+    attributes:
+      Agendamento:
+        cliente_id: "Cliente"
+        consultor_id: "Consultor"
+        data: "Data"
+        hora_inicio: "Hora de Início"
+        hora_fim: "Hora de Fim"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+      Area:
+        nome: "Nome"
+        descricao: "Descrição"
+        icone: "Ícone"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+      Cidade:
+        descricao: "Descrição"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+      DisponibilidadeConsultor:
+        consultor_id: "Consultor"
+        data: "Data"
+        hora_inicio: "Hora de Início"
+        hora_fim: "Hora de Fim"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+      Especialidade:
+        nome: "Nome"
+        descricao: "Descrição"
+        area_id: "Área"
+        icone: "Ícone"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"
+      User:
+        email: "E-mail"
+        encrypted_password: "Senha Criptografada"
+        reset_password_token: "Token de Redefinição de Senha"
+        reset_password_sent_at: "Senha Redefinida Enviada em"
+        remember_created_at: "Criado em Lembrete"
+        consultor: "Consultor"
+        especialidade_id: "Especialidade"
+        cidade_id: "Cidade"
+        nome: "Nome"
+        descricao: "Descrição"
+        foto: "Foto"
+        created_at: "Criado em"
+        updated_at: "Atualizado em"

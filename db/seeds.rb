@@ -1,92 +1,87 @@
 # db/seeds.rb
 
-# Criando Cidades
-cidades = [
-  { descricao: 'Cidade A' },
-  { descricao: 'Cidade B' },
-  { descricao: 'Cidade C' }
+# Limpa as tabelas para evitar duplicatas
+Agendamento.destroy_all
+DisponibilidadeConsultor.destroy_all
+Especialidade.destroy_all
+User.destroy_all
+Area.destroy_all
+Cidade.destroy_all
+
+# Criando algumas cidades
+cidades = %w[
+  São\ Paulo
+  Rio\ de\ Janeiro
+  Belo\ Horizonte
+  Porto\ Alegre
+  Curitiba
+  Salvador
+  Recife
+  Fortaleza
+  Brasília
+  Campinas
 ]
 
-# Criação das cidades com tratamento de erros
-cidades_records = Cidade.create(cidades)
-cidades_records.each do |cidade|
-  unless cidade.persisted?
-    puts "Erro ao criar cidade: #{cidade.errors.full_messages.join(", ")}"
-  end
+cidades.each do |cidade_nome|
+  Cidade.create!(descricao: cidade_nome)
 end
 
-# Criando Áreas
+# Criando algumas áreas
 areas = [
-  { descricao: 'Área de Saúde' },
-  { descricao: 'Área de Tecnologia' },
-  { descricao: 'Área de Educação' }
+  { nome: "Tecnologia", descricao: "Área focada em inovação e tecnologia", icone: "tech_icon.png" },
+  { nome: "Saúde", descricao: "Área dedicada à saúde e bem-estar", icone: "health_icon.png" },
+  { nome: "Educação", descricao: "Área de ensino e aprendizado", icone: "education_icon.png" },
+  { nome: "Negócios", descricao: "Área de negócios e empreendedorismo", icone: "business_icon.png" },
+  { nome: "Arte", descricao: "Área de expressão artística", icone: "art_icon.png" }
 ]
 
-# Criação das áreas com tratamento de erros
-areas_records = Area.create(areas)
-areas_records.each do |area|
-  unless area.persisted?
-    puts "Erro ao criar área: #{area.errors.full_messages.join(", ")}"
-  end
+areas.each do |area|
+  Area.create!(area)
 end
 
-# Criando Especialidades
+# Criando especialidades com relação às áreas
 especialidades = [
-  { descricao: 'Cardiologia', area_id: areas_records[0].id },
-  { descricao: 'Pediatria', area_id: areas_records[0].id },
-  { descricao: 'Desenvolvimento Web', area_id: areas_records[1].id },
-  { descricao: 'Ensino de Matemática', area_id: areas_records[2].id }
+  { nome: "Desenvolvimento Web", descricao: "Criação de sites e aplicações web", area_id: Area.find_by(nome: "Tecnologia").id, icone: "web_icon.png" },
+  { nome: "Psicologia", descricao: "Atendimento psicológico", area_id: Area.find_by(nome: "Saúde").id, icone: "psychology_icon.png" },
+  { nome: "Matemática", descricao: "Ensino de Matemática", area_id: Area.find_by(nome: "Educação").id, icone: "math_icon.png" },
+  { nome: "Marketing Digital", descricao: "Estratégias de marketing online", area_id: Area.find_by(nome: "Negócios").id, icone: "marketing_icon.png" },
+  { nome: "Pintura", descricao: "Técnicas de pintura", area_id: Area.find_by(nome: "Arte").id, icone: "painting_icon.png" }
 ]
 
-# Criação das especialidades com tratamento de erros
-especialidades_records = Especialidade.create(especialidades)
-especialidades_records.each do |especialidade|
-  unless especialidade.persisted?
-    puts "Erro ao criar especialidade: #{especialidade.errors.full_messages.join(", ")}"
-  end
+especialidades.each do |especialidade|
+  Especialidade.create!(especialidade)
 end
 
-# Criando Users (Clientes e Consultores)
-users = [
-  { email: 'cliente1@example.com', nome: 'Cliente 1', password: 'password', consultor: false, cidade_id: cidades_records.find { |cidade| cidade.descricao == 'Cidade A' }.id },
-  { email: 'consultor1@example.com',nome: 'Consultor 2', password: 'password', consultor: true, especialidade_id: especialidades_records.find { |esp| esp.descricao == 'Cardiologia' }.id, cidade_id: cidades_records.find { |cidade| cidade.descricao == 'Cidade A' }.id },
-  { email: 'consultor2@example.com',nome: 'Consultor 1', password: 'password', consultor: true, especialidade_id: especialidades_records.find { |esp| esp.descricao == 'Pediatria' }.id, cidade_id: cidades_records.find { |cidade| cidade.descricao == 'Cidade B' }.id },
+# Criando alguns usuários (consultores e clientes)
+usuarios = [
+  { email: "cliente1@example.com", password: "password", consultor: false, especialidade_id: nil, cidade_id: Cidade.find_by(descricao: "São Paulo").id, nome: "João Silva", descricao: "Cliente de teste 1", foto: "cliente1.png" },
+  { email: "cliente2@example.com", password: "password", consultor: false, especialidade_id: nil, cidade_id: Cidade.find_by(descricao: "Rio de Janeiro").id, nome: "Maria Oliveira", descricao: "Cliente de teste 2", foto: "cliente2.png" },
+  { email: "consultor1@example.com", password: "password", consultor: true, especialidade_id: Especialidade.find_by(nome: "Desenvolvimento Web").id, cidade_id: Cidade.find_by(descricao: "São Paulo").id, nome: "Carlos Pereira", descricao: "Consultor de TI", foto: "consultor1.png" },
+  { email: "consultor2@example.com", password: "password", consultor: true, especialidade_id: Especialidade.find_by(nome: "Psicologia").id, cidade_id: Cidade.find_by(descricao: "Belo Horizonte").id, nome: "Ana Souza", descricao: "Psicóloga clínica", foto: "consultor2.png" }
 ]
 
-# Criação dos usuários com tratamento de erros
-users_records = User.create(users)
-users_records.each do |user|
-  unless user.persisted?
-    puts "Erro ao criar usuário: #{user.errors.full_messages.join(", ")}"
-  end
+usuarios.each do |usuario|
+  User.create!(usuario)
 end
 
-# Criando Disponibilidade dos Consultores
-disponibilidade = [
-  { consultor_id: User.find_by(email: 'consultor1@example.com')&.id, data: Date.today, hora_inicio: '09:00:00', hora_fim: '17:00:00' },
-  { consultor_id: User.find_by(email: 'consultor2@example.com')&.id, data: Date.today, hora_inicio: '10:00:00', hora_fim: '18:00:00' }
-]
-
-# Criação da disponibilidade com tratamento de erros
-disponibilidade_records = DisponibilidadeConsultor.create(disponibilidade)
-disponibilidade_records.each do |disponibilidade|
-  unless disponibilidade.persisted?
-    puts "Erro ao criar disponibilidade: #{disponibilidade.errors.full_messages.join(", ")}"
-  end
-end
-
-# Criando Agendamentos
+# Criando agendamentos
 agendamentos = [
-  { cliente_id: User.find_by(email: 'cliente1@example.com')&.id, consultor_id: User.find_by(email: 'consultor1@example.com')&.id, data: Date.today, hora_inicio: '10:00:00', hora_fim: '11:00:00' },
-  { cliente_id: User.find_by(email: 'cliente1@example.com')&.id, consultor_id: User.find_by(email: 'consultor2@example.com')&.id, data: Date.today, hora_inicio: '15:00:00', hora_fim: '16:00:00' }
+  { cliente_id: User.find_by(email: "cliente1@example.com").id, consultor_id: User.find_by(email: "consultor1@example.com").id, data: "2024-10-25", hora_inicio: "10:00", hora_fim: "11:00" },
+  { cliente_id: User.find_by(email: "cliente2@example.com").id, consultor_id: User.find_by(email: "consultor2@example.com").id, data: "2024-10-26", hora_inicio: "14:00", hora_fim: "15:00" }
 ]
 
-# Criação dos agendamentos com tratamento de erros
-agendamentos_records = Agendamento.create(agendamentos)
-agendamentos_records.each do |agendamento|
-  unless agendamento.persisted?
-    puts "Erro ao criar agendamento: #{agendamento.errors.full_messages.join(", ")}"
-  end
+agendamentos.each do |agendamento|
+  Agendamento.create!(agendamento)
 end
 
-puts "Dados de exemplo foram inseridos com sucesso!"
+# Criando disponibilidade de consultores
+disponibilidades = [
+  { consultor_id: User.find_by(email: "consultor1@example.com").id, data: "2024-10-25", hora_inicio: "09:00", hora_fim: "12:00" },
+  { consultor_id: User.find_by(email: "consultor2@example.com").id, data: "2024-10-26", hora_inicio: "13:00", hora_fim: "16:00" }
+]
+
+disponibilidades.each do |disponibilidade|
+  DisponibilidadeConsultor.create!(disponibilidade)
+end
+
+puts "Dados de teste criados com sucesso!"

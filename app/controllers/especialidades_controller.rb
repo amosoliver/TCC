@@ -8,9 +8,12 @@ class EspecialidadesController < ApplicationController
 
   # GET /especialidades/1 or /especialidades/1.json
   # GET /especialidades/1 or /especialidades/1.json
-def show
-  @consultores = User.where(consultor: true, especialidade_id: @especialidade.id)
-end
+  def show
+    @consultores = User.where(consultor: true, especialidade_id: @especialidade.id)
+    # Remover a linha abaixo, pois já temos @especialidade definida pelo set_especialidade
+    # @especialidade = Especialidade.where(id: @especialidade.id)
+  end
+  
 
 
   # GET /especialidades/new

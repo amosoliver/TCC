@@ -1,27 +1,26 @@
+<section id="team" class="team section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2><%= @especialidade.nome %></h2>
+    </div>
 
-
-
-
-   <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>consultores</h2>
-        </div>
-
-        <div class="row">
-           <% @consultores.each do |consultore| %>
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-             <h4><a href="<%= user_path(consultore) %>"><%= consultore.nome %></a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+    <% if @consultores.any? %>
+      <div class="row">
+        <% @consultores.each do |consultore| %>
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
+              <div class="pic"><img src="" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4><%= link_to consultore.nome, consultor_path(consultore) %></h4> <!-- Link para a rota show -->
+                <span><%= consultore.especialidade.nome %></span>
+                <p><%= consultore.descricao %></p>
+              </div>
             </div>
           </div>
-          br
-            <% end %>
-        </div>
+        <% end %>
       </div>
-    </section>  
-
-
+    <% else %>
+      <p>Não há consultores disponíveis para esta especialidade.</p>
+    <% end %>
+  </div>
+</section>
