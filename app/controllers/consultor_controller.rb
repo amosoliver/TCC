@@ -7,9 +7,34 @@ class ConsultorController < ApplicationController
   end
 
   def show
-    # Exibe os agendamentos onde o consultor_id é igual ao consultor atual
     @agendamentos = Agendamento.where(consultor_id: @consultor.id)
+    
+    @calendar_events = @agendamentos.map do |agendamento|
+      {
+        id: agendamento.id,
+        name: "Agendamento com Cliente ##{agendamento.cliente_id}",
+        start: agendamento.data.to_time.change(hour: agendamento.hora_inicio.hour, min: agendamento.hora_inicio.min).iso8601,
+        end: agendamento.data.to_time.change(hour: agendamento.hora_fim.hour, min: agendamento.hora_fim.min).iso8601,
+        color: '#FF5733' 
+      }
+    end
+    
+    @disponibilidades = DisponibilidadeConsultor.where(consultor_id: @consultor.id)
+  
+    available_dates = @disponibilidades.map do |disponibilidade|
+      {
+        id: "disponibilidade_#{disponibilidade.id}",
+        name: "Disponível",
+        start: disponibilidade.data.to_time.change(hour: disponibilidade.hora_inicio.hour, min: disponibilidade.hora_inicio.min).iso8601,
+        end: disponibilidade.data.to_time.change(hour: disponibilidade.hora_fim.hour, min: disponibilidade.hora_fim.min).iso8601,
+        color: '#28A745' 
+      }
+    end
+    
+    @calendar_events.concat(available_dates) # Use concat para adicionar os elementos sem mutação
   end
+  
+  
 
   def new
     # lógica para mostrar o formulário de novo consultor
