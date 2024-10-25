@@ -1,0 +1,49 @@
+<h1 class="mt-4">Detalhes do Consultor</h1>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>Informações do Consultor</h5>
+    </div>
+    <div class="card-body">
+      <p><strong>Nome:</strong> <%= @consultor.nome %></p>
+      <p><strong>Email:</strong> <%= @consultor.email %></p>
+      <p><strong>Especialidade:</strong> <%= @consultor.especialidade.nome %></p>
+      <p><strong>Cidade:</strong> <%= @consultor.cidade.descricao %></p>
+      <p><strong>Descrição:</strong> <%= @consultor.descricao %></p>
+    </div>
+  </div>
+  
+  <h2 class="mt-5">Agendamentos</h2>
+  
+  <% if @agendamentos.any? %>
+    <table class="table table-striped table-bordered mt-3">
+      <thead class="table-dark">
+        <tr>
+          <th>ID do Agendamento</th>
+          <th>Cliente</th>
+          <th>Data</th>
+          <th>Hora de Início</th>
+          <th>Hora de Fim</th>
+          <th>Data de Criação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @agendamentos.each do |agendamento| %>
+          <tr>
+            <td><%= agendamento.id %></td>
+            <td><%= User.find(agendamento.cliente_id).nome %></td>
+            <td><%= agendamento.data %></td>
+            <td><%= agendamento.hora_inicio %></td>
+            <td><%= agendamento.hora_fim %></td>
+            <td><%= agendamento.created_at.strftime("%d/%m/%Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="alert alert-warning mt-3" role="alert">
+      Esse consultor ainda não tem agendamentos.
+    </div>
+  <% end %>
+  
+  

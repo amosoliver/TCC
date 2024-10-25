@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Associação para a especialidade
   belongs_to :especialidade, optional: true
+  belongs_to :cidade
 
   # Associação para clientes
   has_many :agendamentos, foreign_key: 'cliente_id', class_name: 'Agendamento'
