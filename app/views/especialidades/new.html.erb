@@ -1,9 +1,16 @@
-<h1>New especialidade</h1>
 
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Criar especialidade</h2>
+    </div>
+
+    <div class="row">
 <%= render "form", especialidade: @especialidade %>
+    </div>
+  </div>
 
-<br>
-
-<div>
+  <div>
   <%= link_to "Back to especialidades", especialidades_path %>
 </div>
+</section>

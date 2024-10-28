@@ -1,10 +1,19 @@
-<h1>Editing especialidade</h1>
 
-<%= render "form", especialidade: @especialidade %>
 
-<br>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Editar especialidade</h2>
+    </div>
 
-<div>
+    <div class="row">
+    <%= render "form", especialidade: @especialidade %>
+    </div>
+  </div>
+
+  <div>
   <%= link_to "Show this especialidade", @especialidade %> |
   <%= link_to "Back to especialidades", especialidades_path %>
 </div>
+</section>
+
