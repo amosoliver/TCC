@@ -1,14 +1,25 @@
-<p style="color: green"><%= notice %></p>
+   <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
 
-<h1>Especialidades</h1>
+        <div class="section-title">
+          <h2>Especialidades</h2>
+        </div>
 
-<div id="especialidades">
+<div class="row">
   <% @especialidades.each do |especialidade| %>
-    <%= render especialidade %>
-    <p>
-      <%= link_to "Show this especialidade", especialidade %>
-    </p>
+    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+      <div class="icon-box">
+        <div class="icon"><i class="bx bxl-dribbble"></i></div>
+        <h4><a href="<%= especialidade_path(especialidade) %>"><%= especialidade.descricao %></a></h4>
+        <p><%= especialidade.nome %></p>
+      </div>
+    </div>
   <% end %>
-</div>
+</div>  
 
-<%= link_to "New especialidade", new_especialidade_path %>
+        
+      </div>
+    </section>  
+
+    <%= link_to "New especialidade", new_especialidade_path, class: 'btn btn-primary' %> <!-- Adicionei uma classe para estilizar o botão -->
+

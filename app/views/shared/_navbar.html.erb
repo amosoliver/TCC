@@ -1,34 +1,35 @@
-  <header id="header" class="fixed-top ">
+<header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="/">Arsha</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto"><img src="arsha/assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-      <h1 class="logo me-auto"><a href="/">Arsha</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="arsha/assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+        <nav id="navbar" class="navbar">
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="<%= especialidades_path %>">Especialidades</a></li>
+                <li><a href="<%= areas_path %>">Áreas</a></li>
+                <li><a href="<%= usuarios_path %>">Usuários</a></li>
+                <li><a href="<%= agendamentos_path %>">Agendamentos</a></li>
+                <li><a href="<%= disponibilidade_consultors_path %>">Disponibilidade Consultores</a></li>
+                <li><a href="<%= cidades_path %>">Cidades</a></li>
+                <li><a href="<%= consultor_index_path %>">Consultor</a></li>
+                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                
+                <% if user_signed_in? %>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <%= current_user.nome %> <i class="bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+                        </ul>
+                    </li>
+                <% else %>
+                    <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+                <% end %>
             </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
     </div>
-  </header>
+</header>

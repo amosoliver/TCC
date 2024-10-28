@@ -1,14 +1,29 @@
-<p style="color: green"><%= notice %></p>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Usuários</h2>
+    </div>
 
-<h1>Users</h1>
+    <div class="row">
+      <% @users.each do |user| %>
+        <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box">
+            <h4><a href="<%= user_path(user) %>"><%= user.nome %></a></h4>
+            <p><strong>Email:</strong> <%= user.email %></p>
+            <p><strong>Consultor:</strong> <%= user.consultor ? 'Sim' : 'Não' %></p>
+            
+            <% if user.consultor %>
+              <p><strong>Especialidade:</strong> <%= user.especialidade.nome %></p>
+            <% end %>
+            
+            <p><strong>Cidade:</strong> <%= user.cidade.descricao %></p>
+            <p><strong>Data de Criação:</strong> <%= user.created_at.strftime("%d/%m/%Y") %></p>
+            <p><strong>Última Atualização:</strong> <%= user.updated_at.strftime("%d/%m/%Y") %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New user", new_user_path %>
+<%= link_to "New User", new_user_path, class: 'btn btn-primary' %>

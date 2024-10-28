@@ -7,8 +7,14 @@ class EspecialidadesController < ApplicationController
   end
 
   # GET /especialidades/1 or /especialidades/1.json
+  # GET /especialidades/1 or /especialidades/1.json
   def show
+    @consultores = User.where(consultor: true, especialidade_id: @especialidade.id)
+    # Remover a linha abaixo, pois já temos @especialidade definida pelo set_especialidade
+    # @especialidade = Especialidade.where(id: @especialidade.id)
   end
+  
+
 
   # GET /especialidades/new
   def new
@@ -65,6 +71,6 @@ class EspecialidadesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def especialidade_params
-      params.require(:especialidade).permit(:descricao, :area_id)
+      params.require(:especialidade).permit(:nome,:descricao, :area_id)
     end
 end

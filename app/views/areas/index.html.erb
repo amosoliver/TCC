@@ -1,14 +1,21 @@
-<p style="color: green"><%= notice %></p>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Areas</h2>
+    </div>
 
-<h1>Areas</h1>
+    <div class="row">
+      <% @areas.each do |area| %>
+        <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box">
+            <div class="icon"><i class="bx bxl-dribbble"></i></div>
+            <h4><a href="<%= area_path(area) %>"><%= area.nome %></a></h4>
+            <p><%= area.descricao %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
 
-<div id="areas">
-  <% @areas.each do |area| %>
-    <%= render area %>
-    <p>
-      <%= link_to "Show this area", area %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New area", new_area_path %>
+<%= link_to "New area", new_area_path, class: 'btn btn-primary' %>

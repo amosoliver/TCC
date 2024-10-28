@@ -1,0 +1,41 @@
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2 class="mt-4"><%= @consultor.nome %></h2>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <p><strong>Email:</strong> <%= @consultor.email %></p>
+        <p><strong>Especialidade:</strong> <%= @consultor.especialidade.nome %></p>
+        <p><strong>Cidade:</strong> <%= @consultor.cidade.descricao %></p>
+        <p><strong>Especialidade:</strong> <%= @consultor.descricao %></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <h2 class="mt-5">Agendamentos</h2>
+
+      <% if @agendamentos.any? %>
+        <div class="row">
+          <% @agendamentos.each do |agendamento| %>
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                <h4><%= agendamento.cliente.nome %></></h4>
+                <p><%= agendamento.data.strftime("%d/%m/%Y") %></p>
+                <p><%= agendamento.hora_inicio.strftime("%H:%M") %> - <%= agendamento.hora_fim.strftime("%H:%M") %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="alert alert-warning mt-3" role="alert">
+          Esse consultor ainda não tem agendamentos.
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+</section>

@@ -24,7 +24,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_22_020954) do
   end
 
   create_table "areas", force: :cascade do |t|
+    t.string "nome"
     t.string "descricao"
+    t.string "icone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -46,8 +48,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_22_020954) do
   end
 
   create_table "especialidades", force: :cascade do |t|
+    t.string "nome"
     t.string "descricao"
     t.integer "area_id", null: false
+    t.string "icone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["area_id"], name: "index_especialidades_on_area_id"
@@ -62,6 +66,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_22_020954) do
     t.boolean "consultor"
     t.integer "especialidade_id"
     t.integer "cidade_id"
+    t.string "nome"
+    t.text "descricao"
+    t.string "foto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
