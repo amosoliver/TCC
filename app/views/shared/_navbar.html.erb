@@ -9,13 +9,25 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="<%= especialidades_path %>">Especialidades</a></li>
                 <li><a href="<%= areas_path %>">Áreas</a></li>
-                <li><a href="<%= users_path %>">Usuários</a></li>
+                <li><a href="<%= usuarios_path %>">Usuários</a></li>
                 <li><a href="<%= agendamentos_path %>">Agendamentos</a></li>
                 <li><a href="<%= disponibilidade_consultors_path %>">Disponibilidade Consultores</a></li>
                 <li><a href="<%= cidades_path %>">Cidades</a></li>
                 <li><a href="<%= consultor_index_path %>">Consultor</a></li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+                
+                <% if user_signed_in? %>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <%= current_user.nome %> <i class="bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+                        </ul>
+                    </li>
+                <% else %>
+                    <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+                <% end %>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
