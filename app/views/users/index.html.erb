@@ -8,7 +8,7 @@
       <% @users.each do |user| %>
         <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
           <div class="icon-box">
-            <h4><a href="<%= user_path(user) %>"><%= user.nome %></a></h4>
+            <h4><a href="<%= usuario_path(user) %>"><%= user.nome %></a></h4>
             <p><strong>Email:</strong> <%= user.email %></p>
             <p><strong>Consultor:</strong> <%= user.consultor ? 'Sim' : 'Não' %></p>
             
@@ -26,4 +26,4 @@
   </div>
 </section>
 
-<%= link_to "New User", new_user_path, class: 'btn btn-primary' %>
+<%= link_to "New User", new_usuario_path, class: 'btn btn-primary' %>
