@@ -8,14 +8,44 @@ class ConsultorController < ApplicationController
 
   def show
     @agendamentos = Agendamento.includes(:cliente)
-    .where(consultor_id: @consultor.id)
-    .order(:data, :hora_inicio)
-
+      .where(consultor_id: @consultor.id)
+      .order(:data, :hora_inicio)
+  
+    @disponibilidade = DisponibilidadeConsultor
+      .select('DATE(data) AS data, hora_inicio, hora_fim')
+      .group('DATE(data)')
+  
+    # Criando um hash para armazenar os horários ocupados
+    ocupados = {}
+    @agendamentos.each do |agendamento|
+      data = agendamento.data.to_date
+      hora_inicio = agendamento.hora_inicio.strftime("%H:%M")
+      hora_fim = agendamento.hora_fim.strftime("%H:%M")
+  
+      # Adicionando os horários ao hash de ocupados
+      ocupados[data] ||= []
+      ocupados[data] << { inicio: hora_inicio, fim: hora_fim }
+    end
+  
+    @resultado = @disponibilidade.map do |disp|
+      data = disp.data.to_date
+      hora_inicio = disp.hora_inicio.strftime("%H:%M")
+      hora_fim = disp.hora_fim.strftime("%H:%M")
+  
+      # Verificando se o horário de início está ocupado
+      ocupado = ocupados[data]&.any? do |ocupado_horario|
+        hora_inicio >= ocupado_horario[:inicio] && hora_inicio < ocupado_horario[:fim]
+      end
+  
+      {
+        data: data,
+        horas: [{ hora: hora_inicio, ocupado: ocupado }]
+      }
+    end
   end
   
   
   
-
   def new
     # lógica para mostrar o formulário de novo consultor
     @consultor = User.new

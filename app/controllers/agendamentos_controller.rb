@@ -11,11 +11,16 @@ class AgendamentosController < ApplicationController
   end
 
   # GET /agendamentos/new
-  def new
-    @agendamento = Agendamento.new
-  end
+def new
+  @agendamento = Agendamento.new(
+    consultor_id: params[:consultor_id], 
+    cliente_id: params[:cliente_id], 
+    data: params[:data] ? Date.parse(params[:data]) : nil,
+    hora_inicio: params[:hora_inicio] ? Time.parse(params[:hora_inicio]) : nil,
+    hora_fim: params[:hora_fim] ? Time.parse(params[:hora_fim]) : nil  # Adicionando hora_fim
+  )
+end
 
-  # GET /agendamentos/1/edit
   def edit
   end
 

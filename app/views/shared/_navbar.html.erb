@@ -2,28 +2,28 @@
     <div class="container d-flex align-items-center">
         <h1 class="logo me-auto"><a href="/">Arsha</a></h1>
         
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a href="/">Home</a></li>
-                
-                <% if user_signed_in? && !current_user.consultor %>
-                    <li><a href="<%= especialidades_path %>">Especialidades</a></li>
-                    <li><a href="<%= areas_path %>">Áreas</a></li>
-                    <li><a href="<%= agendamentos_path %>">Agendamentos</a></li>
-                    <li><a href="<%= consultor_index_path %>">Consultor</a></li>
-                <% else %>
-                    <li><a href="<%= especialidades_path %>">Especialidades</a></li>
-                    <li><a href="<%= areas_path %>">Áreas</a></li>
-                    <li><a href="<%= usuarios_path %>">Usuários</a></li>
-                    <li><a href="<%= agendamentos_path %>">Agendamentos</a></li>
-                    <li><a href="<%= disponibilidade_consultors_path %>">Disponibilidade Consultores</a></li>
-                    <li><a href="<%= cidades_path %>">Cidades</a></li>
-                    <li><a href="<%= consultor_index_path %>">Consultor</a></li>
-                <% end %>
+        <% if user_signed_in? %>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    
+                    <% if !current_user.consultor %>
+                        <li><a href="<%= especialidades_path %>">Especialidades</a></li>
+                        <li><a href="<%= areas_path %>">Áreas</a></li>
+                        <li><a href="<%= agendamentos_path %>">Agendamentos</a></li>
+                        <li><a href="<%= consultor_index_path %>">Consultor</a></li>
+                    <% else %>
+                        <li><a href="<%= especialidades_path %>">Especialidades</a></li>
+                        <li><a href="<%= areas_path %>">Áreas</a></li>
+                        <li><a href="<%= usuarios_path %>">Usuários</a></li>
+                        <li><a href="<%= agendamentos_path %>">Agendamentos</a></li>
+                        <li><a href="<%= disponibilidade_consultors_path %>">Disponibilidade Consultores</a></li>
+                        <li><a href="<%= cidades_path %>">Cidades</a></li>
+                        <li><a href="<%= consultor_index_path %>">Consultor</a></li>
+                    <% end %>
 
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                
-                <% if user_signed_in? %>
+                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+
                     <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <%= current_user.nome %> <i class="bi bi-chevron-down"></i>
@@ -32,11 +32,15 @@
                             <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Você tem certeza que deseja sair?' } %>
                         </ul>
                     </li>
-                <% else %>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        <% else %>
+            <nav id="navbar" class="navbar">
+                <ul>
                     <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
-                <% end %>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
+                </ul>
+            </nav>
+        <% end %>
     </div>
 </header>

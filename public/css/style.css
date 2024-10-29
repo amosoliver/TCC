@@ -840,6 +840,18 @@ section {
   overflow: hidden; /* Evite que o conteúdo extrapole */
 }
 
+.services .icon-box-agendamento {
+  width: 310px !important; /* Largura desejada */
+  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+  padding: 20px; /* Ajuste o padding se necessário */
+  transition: all ease-in-out 0.4s;
+  background: #fff;
+  display: flex; /* Use flexbox para organizar o conteúdo */
+  flex-direction: column; /* Organize verticalmente */
+  justify-content: space-between; /* Distribua o espaço entre os elementos */
+  overflow: hidden; /* Evite que o conteúdo extrapole */
+}
+
 .services .icon-box .icon {
   margin-bottom: 10px;
   display: flex; /* Use flexbox para centralizar a imagem */

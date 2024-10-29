@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!, unless: :users_new_or_create?
   before_action :check_consultor_permissions
 
   private
+
+  # Método para verificar se é o UsersController com as ações new ou create
+  def users_new_or_create?
+    controller_name == 'users' && %w[new create].include?(action_name)
+  end
 
   def check_consultor_permissions
     # Verifica se o usuário é um consultor e está tentando acessar rotas restritas

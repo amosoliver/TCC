@@ -1,9 +1,11 @@
 pt-BR:
   devise:
-      failure:
-        user:
-          already_authenticated: "Você já está autenticado."
+    failure:
+      user:
         already_authenticated: "Você já está autenticado."
+      already_authenticated: "Você já está autenticado."
+      not_found_in_database: "E-mail ou senha incorretos"
+      
   activerecord:
     models:
       Agendamento: "Agendamento"
@@ -60,8 +62,10 @@ pt-BR:
         foto: "Foto"
         created_at: "Criado em"
         updated_at: "Atualizado em"
+        current_password: "Senha Atual" # Adicionado para tradução do campo 'current_password'
 
   errors:
     messages:
       required: "é obrigatório"
       not_saved: "Não foi possível salvar %{resource} devido a erros"
+      blank: "não pode ficar em branco" # Mensagem para 'blank'

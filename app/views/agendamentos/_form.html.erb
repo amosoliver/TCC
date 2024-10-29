@@ -2,7 +2,6 @@
   <% if agendamento.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(agendamento.errors.count, "error") %> prohibited this agendamento from being saved:</h2>
-
       <ul>
         <% agendamento.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -13,12 +12,12 @@
 
   <div>
     <%= form.label :cliente_id, style: "display: block" %>
-    <%= form.text_field :cliente_id %>
+    <%= form.collection_select :cliente_id, User.all, :id, :nome, { include_blank: true }, { readonly: !agendamento.new_record? } %>
   </div>
 
   <div>
     <%= form.label :consultor_id, style: "display: block" %>
-    <%= form.text_field :consultor_id %>
+    <%= form.collection_select :consultor_id, User.all, :id, :nome, { include_blank: true }, { readonly: !agendamento.new_record? } %>
   </div>
 
   <div>
