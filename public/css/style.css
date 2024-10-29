@@ -828,8 +828,8 @@ section {
 # Services
 --------------------------------------------------------------*/
 .services .icon-box {
-  width: 300px; /* Largura desejada */
-  height: 400px; /* Altura fixa desejada */
+  width: 310px; /* Largura desejada */
+  height: 200px; /* Altura fixa desejada */
   box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
   padding: 20px; /* Ajuste o padding se necessário */
   transition: all ease-in-out 0.4s;

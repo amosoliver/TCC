@@ -18,4 +18,6 @@
   </div>
 </section>
 
-<%= link_to "New area", new_area_path, class: 'btn btn-primary' %>
+<% if current_user&.consultor? %>
+  <%= link_to "New area", new_area_path, class: 'btn btn-primary' %>
+<% end %>

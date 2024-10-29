@@ -20,6 +20,7 @@
         
       </div>
     </section>  
-
-    <%= link_to "New especialidade", new_especialidade_path, class: 'btn btn-primary' %> <!-- Adicionei uma classe para estilizar o botão -->
+    <% if current_user&.consultor? %>
+    <%= link_to "New especialidade", new_especialidade_path, class: 'btn btn-primary' %> 
+    <% end %>
 

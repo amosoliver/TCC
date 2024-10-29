@@ -19,6 +19,11 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def logout_and_redirect
+    sign_out(current_user)
+    redirect_to root_path, notice: "Você saiu da sessão."
+  end
+
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
@@ -69,3 +74,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:descricao,:nome,:email, :password, :password_confirmation, :consultor, :especialidade_id, :cidade_id)
   end
 end
+  

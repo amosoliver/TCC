@@ -1,4 +1,9 @@
 pt-BR:
+  devise:
+      failure:
+        user:
+          already_authenticated: "Você já está autenticado."
+        already_authenticated: "Você já está autenticado."
   activerecord:
     models:
       Agendamento: "Agendamento"
@@ -6,7 +11,7 @@ pt-BR:
       Cidade: "Cidade"
       DisponibilidadeConsultor: "Disponibilidade do Consultor"
       Especialidade: "Especialidade"
-      User: "Usuário"
+      user: "Usuário"
 
     attributes:
       Agendamento:
@@ -41,7 +46,7 @@ pt-BR:
         icone: "Ícone"
         created_at: "Criado em"
         updated_at: "Atualizado em"
-      User:
+      user:
         email: "E-mail"
         encrypted_password: "Senha Criptografada"
         reset_password_token: "Token de Redefinição de Senha"
@@ -55,3 +60,8 @@ pt-BR:
         foto: "Foto"
         created_at: "Criado em"
         updated_at: "Atualizado em"
+
+  errors:
+    messages:
+      required: "é obrigatório"
+      not_saved: "Não foi possível salvar %{resource} devido a erros"
