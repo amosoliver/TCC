@@ -3,23 +3,26 @@ class AgendamentosController < ApplicationController
 
   # GET /agendamentos or /agendamentos.json
   def index
-    @agendamentos = Agendamento.all
+    @agendamentos = current_user.agendamentos.includes(:cliente).group_by { |agendamento| agendamento.data.to_date }
   end
+  
 
   # GET /agendamentos/1 or /agendamentos/1.json
   def show
   end
 
   # GET /agendamentos/new
-def new
-  @agendamento = Agendamento.new(
-    consultor_id: params[:consultor_id], 
-    cliente_id: params[:cliente_id], 
-    data: params[:data] ? Date.parse(params[:data]) : nil,
-    hora_inicio: params[:hora_inicio] ? Time.parse(params[:hora_inicio]) : nil,
-    hora_fim: params[:hora_fim] ? Time.parse(params[:hora_fim]) : nil  # Adicionando hora_fim
-  )
-end
+  def new
+    @agendamento = Agendamento.new(
+      consultor_id: params[:consultor_id],
+      cliente_id: params[:cliente_id],
+      data: params[:data] ? Date.parse(params[:data]) : nil,
+      hora_inicio: params[:hora_inicio] ? Time.zone.parse(params[:hora_inicio]) : nil,
+      hora_fim: params[:hora_fim] ? Time.zone.parse(params[:hora_fim]) : nil
+    )
+  end
+  
+  
 
   def edit
   end

@@ -1,16 +1,15 @@
-
 <section id="services" class="services section-bg">
   <div class="container" data-aos="fade-up">
-    <div class="section-title">
+    <div class="section-title text-center">
       <h2>Criar especialidade</h2>
-    </div>
 
-    <div class="row">
-<%= render "form", especialidade: @especialidade %>
-    </div>
+      <div class="row justify-content-center">
+        <div class="col-md-12"> <!-- Ajuste a largura conforme necessário -->
+          <%= render "form", especialidade: @especialidade %>
+        </div>
+      </div>
+
+   </div>
   </div>
 
-  <div>
-  <%= link_to "Back to especialidades", especialidades_path %>
-</div>
 </section>

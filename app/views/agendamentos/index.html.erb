@@ -1,14 +1,29 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Agendamentos</h1>
-
-<div id="agendamentos">
-  <% @agendamentos.each do |agendamento| %>
-    <%= render agendamento %>
-    <p>
-      <%= link_to "Show this agendamento", agendamento %>
-    </p>
+<div class="row">
+  <% @agendamentos.each do |data, agendamentos| %>
+    <div class="col-12 mb-4">
+      <h4><%= data.strftime("%d/%m/%Y") %></h4>
+    </div>
+    
+    <div class="col-12 mb-3">
+      <h5>Horários:</h5>
+    </div>
+    
+    <% agendamentos.each do |agendamento| %>
+      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+        <div class="icon-box-agendamento">
+          <p>
+            <% if agendamento.cliente.present? %>
+              <strong><%= agendamento.cliente.nome %>:</strong> 
+              <%= agendamento.hora_inicio.strftime("%H:%M") %> - 
+              <%= agendamento.hora_fim.strftime("%H:%M") %>
+            <% else %>
+              <strong>Cliente não disponível:</strong>
+              <%= agendamento.hora_inicio.strftime("%H:%M") %> - 
+              <%= agendamento.hora_fim.strftime("%H:%M") %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
-
-<%= link_to "New agendamento", new_agendamento_path %>

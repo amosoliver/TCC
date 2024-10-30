@@ -1,11 +1,43 @@
 pt-BR:
   devise:
+    confirmations:
+      confirmed: "Sua conta foi confirmada com sucesso."
+      send_instructions: "Instruções de confirmação enviadas para o seu e-mail."
+      updated: "Sua conta foi atualizada com sucesso."
+      not_found: "Não foi possível encontrar esse token de confirmação."
+    
+    passwords:
+      send_instructions: "Instruções de redefinição de senha enviadas para o seu e-mail."
+      updated: "Sua senha foi atualizada com sucesso."
+      not_found: "E-mail não encontrado."
+    
+    registrations:
+      signed_up: "Cadastro realizado com sucesso."
+      updated: "Cadastro atualizado com sucesso."
+      destroyed: "Sua conta foi excluída com sucesso."
+      not_found: "Conta não encontrada."
+    
+    sessions:
+      signed_in: "Login efetuado com sucesso."
+      signed_out: "Logout efetuado com sucesso."
+      already_authenticated: "Você já está autenticado."
+    
     failure:
       user:
-        already_authenticated: "Você já está autenticado."
+        not_found_in_database: "E-mail ou senha incorretos."
+        invalid: "E-mail ou senha inválidos."
+        unauthenticated: "Você precisa estar autenticado para acessar esta página." # Adicionada a tradução
+      invalid: "E-mail ou senha inválidos."
       already_authenticated: "Você já está autenticado."
-      not_found_in_database: "E-mail ou senha incorretos"
-      
+      not_confirmed: "Você precisa confirmar sua conta primeiro."
+      locked: "Sua conta está bloqueada."
+      timeout: "Sua sessão expirou. Por favor, faça login novamente."
+      inactive: "Sua conta está inativa."
+
+    unlocks:
+      send_instructions: "Instruções para desbloqueio enviadas para o seu e-mail."
+      unlocked: "Sua conta foi desbloqueada com sucesso."
+
   activerecord:
     models:
       Agendamento: "Agendamento"

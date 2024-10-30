@@ -1,10 +1,15 @@
-<h1>Editing agendamento</h1>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title text-center">
+      <h2>Agendar</h2>
 
-<%= render "form", agendamento: @agendamento %>
+      <div class="row justify-content-center">
+        <div class="col-md-12"> <!-- Ajuste a largura conforme necessário -->
+          <%= render "form", agendamento: @agendamento %>
+        </div>
+      </div>
 
-<br>
+   </div>
+  </div>
 
-<div>
-  <%= link_to "Show this agendamento", @agendamento %> |
-  <%= link_to "Back to agendamentos", agendamentos_path %>
-</div>
+</section>

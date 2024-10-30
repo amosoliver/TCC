@@ -1,28 +1,46 @@
-<%= form_with(model: especialidade) do |form| %>
+<%= form_with(model: especialidade, local: true, class: "centered-form") do |form| %>
   <% if especialidade.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(especialidade.errors.count, "error") %> prohibited this especialidade from being saved:</h2>
-
       <ul>
-        <% especialidade.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% especialidade.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :descricao, style: "display: block" %>
-    <%= form.text_field :descricao %>
+  <div class="form-row justify-content-center">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= form.label :nome, class: "form-label" %>
+        <%= form.text_field :nome, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= form.label :descricao, class: "form-label" %>
+        <%= form.text_field :descricao, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= form.label :area_id, class: "form-label" %>
+        <%= form.collection_select :area_id, Area.all, :id, :nome, { include_blank: true }, class: "form-control" %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :area_id, style: "display: block" %>
-    <%= form.text_field :area_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="form-group mt-3">
+    <div class="d-flex justify-content-between">
+      <div>
+        <%= link_to "<i class='fas fa-arrow-left'></i>".html_safe, especialidades_path, class: "btn btn-secondary" %>
+      </div>
+      <div>
+        <%= form.submit "Salvar", class: "btn btn-primary me-2" %>
+      </div>
+    </div>
   </div>
 <% end %>
-

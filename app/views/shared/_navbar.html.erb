@@ -24,14 +24,17 @@
 
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
 
-                    <li class="dropdown">
+                   <li class="dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <%= current_user.nome %> <i class="bi bi-chevron-down"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Você tem certeza que deseja sair?' } %>
+                            <li>
+                                <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                            </li>
                         </ul>
                     </li>
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>

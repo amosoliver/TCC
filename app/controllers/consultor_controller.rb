@@ -32,27 +32,18 @@ class ConsultorController < ApplicationController
       hora_inicio = disp.hora_inicio.strftime("%H:%M")
       hora_fim = disp.hora_fim.strftime("%H:%M")
   
-      # Gerar todos os horários entre hora_inicio e hora_fim
-      horas = []
-      current_time = Time.parse(hora_inicio)
-      end_time = Time.parse(hora_fim)
-  
-      while current_time < end_time
-        formatted_time = current_time.strftime("%H:%M")
-        ocupado = ocupados[data]&.any? do |ocupado_horario|
-          formatted_time >= ocupado_horario[:inicio] && formatted_time < ocupado_horario[:fim]
-        end
-  
-        horas << { hora: formatted_time, ocupado: ocupado }
-        current_time += 30.minutes # Adiciona 30 minutos, ajuste se necessário
-      end
-  
       {
         data: data,
-        horas: horas
+        hora_inicio: hora_inicio,
+        hora_fim: hora_fim,
+        ocupado: ocupados[data]&.any? do |ocupado_horario|
+          hora_inicio >= ocupado_horario[:inicio] && hora_inicio < ocupado_horario[:fim] ||
+          hora_fim > ocupado_horario[:inicio] && hora_fim <= ocupado_horario[:fim]
+        end
       }
     end
   end
+  
   
   
   

@@ -510,10 +510,28 @@ section {
   background-color: #f3f5fa;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.form-label {
+  text-align: left; /* Alinha o texto do rótulo à esquerda */
+  display: block; /* Garante que o rótulo seja um bloco */
+}
+
+
 .section-title {
   text-align: center;
   padding-bottom: 30px;
 }
+
+.centered-form {
+  max-width: 500px; /* Define uma largura máxima */
+  margin: 0 auto; /* Centraliza o formulário */
+  padding: 20px; /* Espaçamento interno */
+  text-align: center; /* Centraliza o texto */
+}
+
 
 .section-title h2 {
   font-size: 32px;

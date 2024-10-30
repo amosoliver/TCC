@@ -1,10 +1,15 @@
-<h1>Editing disponibilidade consultor</h1>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title text-center">
+      <h2>editar Disponibilidade</h2>
 
-<%= render "form", disponibilidade_consultor: @disponibilidade_consultor %>
+      <div class="row justify-content-center">
+        <div class="col-md-12"> <!-- Ajuste a largura conforme necessário -->
+          <%= render "form", disponibilidade_consultor: @disponibilidade_consultor %>
+        </div>
+      </div>
 
-<br>
+   </div>
+  </div>
 
-<div>
-  <%= link_to "Show this disponibilidade consultor", @disponibilidade_consultor %> |
-  <%= link_to "Back to disponibilidade consultors", disponibilidade_consultors_path %>
-</div>
+</section>

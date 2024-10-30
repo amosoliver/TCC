@@ -1,37 +1,55 @@
-<%= form_with(model: disponibilidade_consultor) do |form| %>
+<%= form_with(model: disponibilidade_consultor, local: true, class: "centered-form") do |form| %>
   <% if disponibilidade_consultor.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(disponibilidade_consultor.errors.count, "error") %> prohibited this disponibilidade_consultor from being saved:</h2>
-
       <ul>
-        <% disponibilidade_consultor.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% disponibilidade_consultor.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :consultor_id, style: "display: block" %>
-    <%= form.text_field :consultor_id %>
+  <div class="form-row justify-content-center">
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= form.label :consultor_id, style: "display: block" %>
+        <%= form.select :consultor_id, User.where(consultor: true).collect { |u| [u.nome, u.id] }, { prompt: 'Selecione um Consultor' }, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= form.label :data, style: "display: block" %>
+        <%= form.date_field :data, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= form.label :hora_inicio, style: "display: block" %>
+        <%= form.time_field :hora_inicio, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= form.label :hora_fim, style: "display: block" %>
+        <%= form.time_field :hora_fim, class: "form-control" %>
+      </div>
+    </div>
+
   </div>
 
-  <div>
-    <%= form.label :data, style: "display: block" %>
-    <%= form.date_field :data %>
-  </div>
-
-  <div>
-    <%= form.label :hora_inicio, style: "display: block" %>
-    <%= form.time_field :hora_inicio %>
-  </div>
-
-  <div>
-    <%= form.label :hora_fim, style: "display: block" %>
-    <%= form.time_field :hora_fim %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="form-group mt-3">
+    <div class="d-flex justify-content-between">
+      <div>
+        <%= link_to "<i class='fas fa-arrow-left'></i>".html_safe, disponibilidade_consultors_path, class: "btn btn-secondary" %>
+      </div>
+      <div>
+        <%= form.submit "Salvar", class: "btn btn-primary me-2" %>
+      </div>
+    </div>
   </div>
 <% end %>

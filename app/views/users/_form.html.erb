@@ -1,9 +1,9 @@
-<%= form_with(model: user, url: usuarios_path) do |form| %>
-  <% if user.errors.any? %>
+<%= form_with(model: @user, url: @user.new_record? ? usuarios_path : usuario_path(@user)) do |form| %>
+  <% if @user.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
       <ul>
-        <% user.errors.full_messages.each do |error| %>
+        <% @user.errors.full_messages.each do |error| %>
           <li><%= error %></li>
         <% end %>
       </ul>
@@ -15,7 +15,10 @@
     <%= form.email_field :email, required: true %>
   </div>
 
-
+  <div>
+    <%= form.label :nome, style: "display: block" %>
+    <%= form.text_field :nome, required: true %>
+  </div>
 
   <div>
     <%= form.label :consultor, style: "display: block" %>
@@ -32,7 +35,30 @@
     <%= form.number_field :cidade_id %>
   </div>
 
+  <% if @user.new_record? %>
+    <div>
+      <%= form.label :password, style: "display: block" %>
+      <%= form.password_field :password, required: true %>
+    </div>
+
+    <div>
+      <%= form.label :password_confirmation, style: "display: block" %>
+      <%= form.password_field :password_confirmation, required: true %>
+    </div>
+  <% else %>
+    <div>
+      <p>Se você deseja alterar a senha, por favor, insira uma nova abaixo:</p>
+      <%= form.label :password, style: "display: block" %>
+      <%= form.password_field :password %>
+    </div>
+
+    <div>
+      <%= form.label :password_confirmation, style: "display: block" %>
+      <%= form.password_field :password_confirmation %>
+    </div>
+  <% end %>
+
   <div>
-    <%= form.submit "Create User" %>
+    <%= form.submit @user.new_record? ? "Create User" : "Update User" %>
   </div>
 <% end %>
