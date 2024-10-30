@@ -1,9 +1,15 @@
-<h1>New cidade</h1>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title text-center">
+      <h2>Criar Cidade</h2>
 
-<%= render "form", cidade: @cidade %>
+      <div class="row justify-content-center">
+        <div class="col-md-12"> <!-- Ajuste a largura conforme necessário -->
+          <%= render "form", cidade: @cidade %>
+        </div>
+      </div>
 
-<br>
+   </div>
+  </div>
 
-<div>
-  <%= link_to "Back to cidades", cidades_path %>
-</div>
+</section>

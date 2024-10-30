@@ -3,8 +3,8 @@
 <%= render @user %>
 
 <div>
-  <%= link_to "Edit this usuario", edit_user_path(@user) %> |
-  <%= link_to "Back to usuarios", users_path %>
+  <%= link_to "Edit this usuario", edit_usuario_path(@user) %> |
+  <%= link_to "Back to usuarios", usuarios_path %>
 
-  <%= button_to "Destroy this usuario", @user, method: :delete, data: { confirm: "Are you sure?" } %>
+<%= button_to "Destroy this usuario", usuarios_path(@user), method: :delete, data: { confirm: "Are you sure?" } %>
 </div>

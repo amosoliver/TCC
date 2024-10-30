@@ -41,6 +41,14 @@ h1, h2, h3, h4, h5, h6 {
   background: #37517e;
 }
 
+.custom-container {
+  max-height: 400px; /* Defina a altura máxima desejada */
+  overflow-y: auto;  /* Adiciona rolagem vertical se o conteúdo exceder a altura máxima */
+  margin: 0 auto;    /* Centraliza o container, se necessário */
+  padding: 15px;     /* Adiciona espaçamento interno */
+}
+
+
 #preloader:before {
   content: "";
   position: fixed;
@@ -510,10 +518,29 @@ section {
   background-color: #f3f5fa;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.form-label {
+  text-align: left; /* Alinha o texto do rótulo à esquerda */
+  display: block; /* Garante que o rótulo seja um bloco */
+}
+
+
+
 .section-title {
   text-align: center;
   padding-bottom: 30px;
 }
+
+.centered-form {
+  max-width: 500px; /* Define uma largura máxima */
+  margin: 0 auto; /* Centraliza o formulário */
+  padding: 20px; /* Espaçamento interno */
+  text-align: center; /* Centraliza o texto */
+}
+
 
 .section-title h2 {
   font-size: 32px;
@@ -828,8 +855,20 @@ section {
 # Services
 --------------------------------------------------------------*/
 .services .icon-box {
-  width: 300px; /* Largura desejada */
-  height: 400px; /* Altura fixa desejada */
+  width: 310px; /* Largura desejada */
+  height: 200px; /* Altura fixa desejada */
+  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+  padding: 20px; /* Ajuste o padding se necessário */
+  transition: all ease-in-out 0.4s;
+  background: #fff;
+  display: flex; /* Use flexbox para organizar o conteúdo */
+  flex-direction: column; /* Organize verticalmente */
+  justify-content: space-between; /* Distribua o espaço entre os elementos */
+  overflow: hidden; /* Evite que o conteúdo extrapole */
+}
+
+.services .icon-box-agendamento {
+  width: 310px !important; /* Largura desejada */
   box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
   padding: 20px; /* Ajuste o padding se necessário */
   transition: all ease-in-out 0.4s;

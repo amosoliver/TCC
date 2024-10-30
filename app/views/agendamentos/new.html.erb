@@ -1,9 +1,13 @@
-<h1>New agendamento</h1>
+<section id="services" class="services section-bg">
+  <div class="custom-container" data-aos="fade-up">
+    <div class="section-title text-center">
+      <h2>Agendar</h2> <!-- Título que queremos fixar -->
 
-<%= render "form", agendamento: @agendamento %>
-
-<br>
-
-<div>
-  <%= link_to "Back to agendamentos", agendamentos_path %>
-</div>
+      <div class="row justify-content-center">
+        <div class="col-md-12"> <!-- Ajuste a largura conforme necessário -->
+          <%= render "form", agendamento: @agendamento %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

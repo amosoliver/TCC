@@ -1,71 +1,70 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_cidades_and_especialidades, only: %i[new create edit]
 
-  # GET /users or /users.json
+  # GET /usuarios or /usuarios.json
   def index
     @users = User.all
   end
 
-  # GET /users/1 or /users/1.json
+  # GET /usuarios/1 or /usuarios/1.json
   def show
   end
 
-  # GET /users/new
+  # GET /usuarios/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
+  # GET /usuarios/1/edit
   def edit
   end
 
-  # POST /users or /users.json
+  # POST /usuarios or /usuarios.json
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      redirect_to usuario_path(@user), notice: 'Usuário criado com sucesso.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /users/1 or /users/1.json
+  # PATCH/PUT /usuarios/1 or /usuarios/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      redirect_to usuario_path(@user), notice: 'Usuário atualizado com sucesso.'
+    else
+      render :edit
     end
   end
 
-  # DELETE /users/1 or /users/1.json
+  # DELETE /usuarios/1 or /usuarios/1.json
   def destroy
-    @user.destroy!
+    @user.destroy
+    redirect_to usuarios_path, notice: 'Usuário excluído com sucesso.'
+  end
 
-    respond_to do |format|
-      format.html { redirect_to users_path, status: :see_other, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
-    end
+  def logout_and_redirect
+    sign_out(current_user)
+    redirect_to root_path, notice: "Você saiu da sessão."
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # Callback para definir o usuário
   def set_user
     @user = User.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+  # Callback para definir cidades e especialidades
+  def set_cidades_and_especialidades
+    @cidades = Cidade.all
+    @especialidades = Especialidade.all
+  end
+
+  # Strong parameters
   def user_params
-    params.require(:user).permit(:descricao,:nome,:email, :password, :password_confirmation, :consultor, :especialidade_id, :cidade_id)
+    params.require(:user).permit(:email, :nome, :consultor, :especialidade_id, :cidade_id, :password, :password_confirmation)
   end
 end

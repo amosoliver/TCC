@@ -1,22 +1,33 @@
-<%= form_with(model: cidade) do |form| %>
+<%= form_with(model: cidade, local: true, class: "centered-form") do |form| %>
   <% if cidade.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(cidade.errors.count, "error") %> prohibited this cidade from being saved:</h2>
-
       <ul>
-        <% cidade.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% cidade.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :descricao, style: "display: block" %>
-    <%= form.text_field :descricao %>
+  <div class="form-row justify-content-center">
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= form.label :descricao, class: "form-label" %>
+        <%= form.text_field :descricao, class: "form-control" %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group mt-3">
+    <div class="d-flex justify-content-between">
+      <div>
+        <%= link_to "<i class='fas fa-arrow-left'></i>".html_safe, cidades_path, class: "btn btn-secondary" %>
+      </div>
+      <div>
+        <%= form.submit "Salvar", class: "btn btn-primary me-2" %>
+      </div>
+    </div>
   </div>
 <% end %>
