@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_22_020954) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_30_174509) do
   create_table "agendamentos", force: :cascade do |t|
     t.integer "cliente_id"
     t.integer "consultor_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_22_020954) do
     t.time "hora_fim"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "disponibilidade_id"
     t.index ["cliente_id"], name: "index_agendamentos_on_cliente_id"
     t.index ["consultor_id"], name: "index_agendamentos_on_consultor_id"
   end
