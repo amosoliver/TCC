@@ -2,48 +2,47 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
   before_action :set_cidades_and_especialidades, only: %i[new create edit]
 
-  # GET /users or /users.json
+  # GET /usuarios or /usuarios.json
   def index
     @users = User.all
-    # @cidades e @especialidades já serão definidas pelo before_action
   end
 
-  # GET /users/1 or /users/1.json
+  # GET /usuarios/1 or /usuarios/1.json
   def show
   end
 
-  # GET /users/new
+  # GET /usuarios/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
+  # GET /usuarios/1/edit
   def edit
   end
 
-  # POST /users or /users.json
+  # POST /usuarios or /usuarios.json
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
+      redirect_to usuario_path(@user), notice: 'Usuário criado com sucesso.'
     else
-      render :new # Isso renderiza a view `new` onde as variáveis já estão definidas
+      render :new
     end
   end
 
-  # PATCH/PUT /users/1 or /users/1.json
+  # PATCH/PUT /usuarios/1 or /usuarios/1.json
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to usuario_path(@user), notice: 'Usuário atualizado com sucesso.'
     else
-      render :edit # Isso renderiza a view `edit` onde as variáveis já estão definidas
+      render :edit
     end
   end
 
-  # DELETE /users/1 or /users/1.json
+  # DELETE /usuarios/1 or /usuarios/1.json
   def destroy
     @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+    redirect_to usuarios_path, notice: 'Usuário excluído com sucesso.'
   end
 
   def logout_and_redirect
