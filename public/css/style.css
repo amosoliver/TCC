@@ -41,6 +41,14 @@ h1, h2, h3, h4, h5, h6 {
   background: #37517e;
 }
 
+.custom-container {
+  max-height: 400px; /* Defina a altura máxima desejada */
+  overflow-y: auto;  /* Adiciona rolagem vertical se o conteúdo exceder a altura máxima */
+  margin: 0 auto;    /* Centraliza o container, se necessário */
+  padding: 15px;     /* Adiciona espaçamento interno */
+}
+
+
 #preloader:before {
   content: "";
   position: fixed;
@@ -518,6 +526,7 @@ section {
   text-align: left; /* Alinha o texto do rótulo à esquerda */
   display: block; /* Garante que o rótulo seja um bloco */
 }
+
 
 
 .section-title {

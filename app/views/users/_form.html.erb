@@ -1,4 +1,4 @@
-<%= form_with(model: @user, url: @user.new_record? ? usuarios_path : user_path(@user), local: true, class: "centered-form") do |form| %>
+<%= form_with(model: @user, url: usuarios_path(@user), local: true, class: "centered-form") do |form| %>
   <% if @user.errors.any? %>
     <div class="alert alert-danger">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
