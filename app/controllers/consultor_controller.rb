@@ -7,44 +7,24 @@ class ConsultorController < ApplicationController
   end
 
   def show
-    @agendamentos = Agendamento.includes(:cliente)
-      .where(consultor_id: @consultor.id)
-      .order(:data, :hora_inicio)
-  
-    @disponibilidade = DisponibilidadeConsultor
-      .select('DATE(data) AS data, hora_inicio, hora_fim')
-      .group('DATE(data)')
-  
-    # Criando um hash para armazenar os horários ocupados
-    ocupados = {}
-    @agendamentos.each do |agendamento|
-      data = agendamento.data.to_date
-      hora_inicio = agendamento.hora_inicio.strftime("%H:%M")
-      hora_fim = agendamento.hora_fim.strftime("%H:%M")
-  
-      # Adicionando os horários ao hash de ocupados
-      ocupados[data] ||= []
-      ocupados[data] << { inicio: hora_inicio, fim: hora_fim }
+    # Encontra o consultor com base no parâmetro e na função de consultor
+    @consultor = User.find(params[:id])
+    unless @consultor.consultor?
+      redirect_to root_path, alert: "Consultor não encontrado"
+      return
     end
   
-    @resultado = @disponibilidade.map do |disp|
-      data = disp.data.to_date
-      hora_inicio = disp.hora_inicio.strftime("%H:%M")
-      hora_fim = disp.hora_fim.strftime("%H:%M")
+    # Carrega as disponibilidades do consultor
+    disponibilidades = @consultor.disponibilidade_consultors.order(:data, :hora_inicio)
+    # Carrega os agendamentos do consultor para marcar os horários ocupados
+    agendamentos = @consultor.agendamentos.group_by { |a| [a.data, a.hora_inicio] }
   
-      {
-        data: data,
-        hora_inicio: hora_inicio,
-        hora_fim: hora_fim,
-        ocupado: ocupados[data]&.any? do |ocupado_horario|
-          hora_inicio >= ocupado_horario[:inicio] && hora_inicio < ocupado_horario[:fim] ||
-          hora_fim > ocupado_horario[:inicio] && hora_fim <= ocupado_horario[:fim]
-        end
-      }
+    # Marca as disponibilidades como 'Ocupado' ou 'Agendar' para exibição na view
+    @resultado = disponibilidades.map do |disponibilidade|
+      status = agendamentos.key?([disponibilidade.data, disponibilidade.hora_inicio]) ? 'Ocupado' : 'Agendar'
+      { disponibilidade: disponibilidade, status: status }
     end
   end
-  
-  
   
   
   

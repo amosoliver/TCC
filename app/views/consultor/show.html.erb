@@ -14,43 +14,28 @@
     </div>
 
     <div class="row">
-  <% @resultado.each do |disponibilidade| %>
-    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
-      <div class="icon-box-agendamento">
-        <h4><%= disponibilidade[:data].strftime("%d/%m/%Y") %></h4>
-        
-        <h5>Horários:</h5>
-        <p>
-          <strong><%= disponibilidade[:hora_inicio] %> - <%= disponibilidade[:hora_fim] %>:</strong> 
-          <% if disponibilidade[:ocupado] %>
-            <button class="btn btn-warning" disabled>
-              Ocupado
-            </button>
-          <% else %>
-            <%= link_to 'Agendar', new_agendamento_path(
-              consultor_id: @consultor.id,
-              cliente_id: current_user.id,
-              data: disponibilidade[:data],
-              hora_inicio: disponibilidade[:hora_inicio],
-              hora_fim: disponibilidade[:hora_fim]
-            ), class: 'btn btn-success' %>
-          <% end %>
-        </p>
+      <% @resultado.each do |item| %>
+        <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box-agendamento">
+            <h4><%= item[:disponibilidade].data.strftime("%d/%m/%Y") %></h4>
+            <p><strong>Início:</strong> <%= item[:disponibilidade].hora_inicio.strftime("%H:%M") %></p>
+            <p><strong>Fim:</strong> <%= item[:disponibilidade].hora_fim.strftime("%H:%M") %></p>
 
-        <h5>Agendamentos:</h5>
-        <% @agendamentos.each do |agendamento| %>
-          <% if agendamento.data.to_date == disponibilidade[:data] %>
-            <p>
-              <strong><%= agendamento.cliente.nome %>:</strong> 
-              <%= agendamento.hora_inicio.strftime("%H:%M") %> - 
-              <%= agendamento.hora_fim.strftime("%H:%M") %>
-            </p>
-          <% end %>
-        <% end %>
-      </div>
+            <% if item[:status] == 'Ocupado' %>
+              <p class="text-danger"><strong>Ocupado</strong></p>
+            <% else %>
+              <%= link_to 'Agendar', new_agendamento_path(
+                  disponibilidade_id: item[:disponibilidade].id,
+                  data: item[:disponibilidade].data,
+                  hora_inicio: item[:disponibilidade].hora_inicio,
+                  hora_fim: item[:disponibilidade].hora_fim,
+                  consultor_id: @consultor.id,
+                  cliente_id: current_user.id
+                ), class: 'btn btn-primary' %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-</div>
-
   </div>
 </section>

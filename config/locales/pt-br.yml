@@ -26,7 +26,7 @@ pt-BR:
       user:
         not_found_in_database: "E-mail ou senha incorretos."
         invalid: "E-mail ou senha inválidos."
-        unauthenticated: "Você precisa estar autenticado para acessar esta página." # Adicionada a tradução
+        unauthenticated: "Você precisa estar autenticado para acessar esta página."
       invalid: "E-mail ou senha inválidos."
       already_authenticated: "Você já está autenticado."
       not_confirmed: "Você precisa confirmar sua conta primeiro."
@@ -94,10 +94,16 @@ pt-BR:
         foto: "Foto"
         created_at: "Criado em"
         updated_at: "Atualizado em"
-        current_password: "Senha Atual" # Adicionado para tradução do campo 'current_password'
+        current_password: "Senha Atual"
 
   errors:
     messages:
       required: "é obrigatório"
       not_saved: "Não foi possível salvar %{resource} devido a erros"
-      blank: "não pode ficar em branco" # Mensagem para 'blank'
+      blank: "não pode ficar em branco"
+      taken: "já está em uso"
+    models:
+      user:
+        attributes:
+          email:
+            taken: "E-mail já está em uso"

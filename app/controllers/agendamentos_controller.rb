@@ -73,6 +73,6 @@ class AgendamentosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def agendamento_params
-      params.require(:agendamento).permit(:cliente_id, :consultor_id, :data, :hora_inicio, :hora_fim)
+      params.require(:agendamento).permit(:cliente_id, :disponibilidade_id, :consultor_id, :data, :hora_inicio, :hora_fim)
     end
 end
