@@ -8,7 +8,14 @@
       <% @users.each do |user| %>
         <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
           <div class="icon-box">
-            <h4><a href="<%= usuario_path(user) %>"><%= user.nome %></a></h4>
+            <h4>
+              <a href="<%= usuario_path(user) %>"><%= user.nome %></a>
+              <% if user.consultor == true && user == current_user %>
+                <div class="float-end">
+                  <%= button_to '<i class="bi bi-pencil"></i>'.html_safe, edit_usuario_path(user), method: :get, class: 'btn btn-primary btn-sm', title: 'Editar', form: { class: 'd-inline' } %>
+                </div>
+              <% end %>
+            </h4>
             <p><strong>Email:</strong> <%= user.email %></p>
             <p><strong>Consultor:</strong> <%= user.consultor ? 'Sim' : 'Não' %></p>
             

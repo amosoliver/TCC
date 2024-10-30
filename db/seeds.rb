@@ -64,16 +64,6 @@ usuarios.each do |usuario|
   User.create!(usuario)
 end
 
-# Criando agendamentos
-agendamentos = [
-  { cliente_id: User.find_by(email: "cliente1@example.com").id, consultor_id: User.find_by(email: "consultor1@example.com").id, data: "2024-10-25", hora_inicio: "10:00", hora_fim: "11:00" },
-  { cliente_id: User.find_by(email: "cliente2@example.com").id, consultor_id: User.find_by(email: "consultor2@example.com").id, data: "2024-10-26", hora_inicio: "14:00", hora_fim: "15:00" }
-]
-
-agendamentos.each do |agendamento|
-  Agendamento.create!(agendamento)
-end
-
 # Criando disponibilidade de consultores
 disponibilidades = [
   { consultor_id: User.find_by(email: "consultor1@example.com").id, data: "2024-10-25", hora_inicio: "09:00", hora_fim: "12:00" },
@@ -82,6 +72,30 @@ disponibilidades = [
 
 disponibilidades.each do |disponibilidade|
   DisponibilidadeConsultor.create!(disponibilidade)
+end
+
+# Criando agendamentos
+agendamentos = [
+  {
+    cliente_id: User.find_by(email: "cliente1@example.com").id,
+    consultor_id: User.find_by(email: "consultor1@example.com").id,
+    disponibilidade_id: DisponibilidadeConsultor.find_by(consultor_id: User.find_by(email: "consultor1@example.com").id, data: "2024-10-25").id,
+    data: "2024-10-25",
+    hora_inicio: "10:00",
+    hora_fim: "11:00"
+  },
+  {
+    cliente_id: User.find_by(email: "cliente2@example.com").id,
+    consultor_id: User.find_by(email: "consultor2@example.com").id,
+    disponibilidade_id: DisponibilidadeConsultor.find_by(consultor_id: User.find_by(email: "consultor2@example.com").id, data: "2024-10-26").id,
+    data: "2024-10-26",
+    hora_inicio: "14:00",
+    hora_fim: "15:00"
+  }
+]
+
+agendamentos.each do |agendamento|
+  Agendamento.create!(agendamento)
 end
 
 puts "Dados de teste criados com sucesso!"
