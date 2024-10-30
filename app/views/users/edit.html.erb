@@ -1,10 +1,15 @@
-<h1>Editing user</h1>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title text-center">
+      <h2>Editar Usuário</h2>
 
-<%= render "form", user: @user %>
+      <div class="row justify-content-center">
+        <div class="col-md-12"> <!-- Ajuste a largura conforme necessário -->
+          <%= render "form", user: @user %>
+        </div>
+      </div>
 
-<br>
+   </div>
+  </div>
 
-<div>
-  <%= link_to "Show all users", usuarios_path %> |
-  <%= link_to "Back to users", usuarios_path %>
-</div>
+</section>
