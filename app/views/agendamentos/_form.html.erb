@@ -12,14 +12,12 @@
 
 <div class="col-md-12">
   <div class="form-group">
-    <%= form.label :disponibilidade_consultor_id, "Disponibilidade Consultor", style: "display: block" %>
-    <p class="form-control-plaintext">ID não disponível</p> <!-- Mensagem informativa -->
+    <%= form.hidden_field :disponibilidade_id, value: agendamento.disponibilidade_id %>
   </div>
 </div>
 
 
-
-  <div class="form-row justify-content-center">
+ <div class="form-row justify-content-center">
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :cliente_id, style: "display: block" %>

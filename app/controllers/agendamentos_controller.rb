@@ -18,9 +18,11 @@ class AgendamentosController < ApplicationController
       cliente_id: params[:cliente_id],
       data: params[:data] ? Date.parse(params[:data]) : nil,
       hora_inicio: params[:hora_inicio] ? Time.zone.parse(params[:hora_inicio]) : nil,
-      hora_fim: params[:hora_fim] ? Time.zone.parse(params[:hora_fim]) : nil
+      hora_fim: params[:hora_fim] ? Time.zone.parse(params[:hora_fim]) : nil,
+      disponibilidade_id: params[:disponibilidade_id] # Adicione esta linha
     )
   end
+  
   
   
 
@@ -75,4 +77,5 @@ class AgendamentosController < ApplicationController
     def agendamento_params
       params.require(:agendamento).permit(:cliente_id, :disponibilidade_id, :consultor_id, :data, :hora_inicio, :hora_fim)
     end
-end
+    
+end 
