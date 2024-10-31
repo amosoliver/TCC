@@ -13,25 +13,29 @@
       </div>
     </div>
 
+    <!-- Agrupa as disponibilidades por data -->
     <div class="row">
-      <% @resultado.each do |item| %>
-        <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+      <% @resultado.group_by { |item| item[:disponibilidade].data }.each do |data, horarios| %>
+        <div class="col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
           <div class="icon-box-agendamento">
-            <h4><%= item[:disponibilidade].data.strftime("%d/%m/%Y") %></h4>
-            <p><strong>Início:</strong> <%= item[:disponibilidade].hora_inicio.strftime("%H:%M") %></p>
-            <p><strong>Fim:</strong> <%= item[:disponibilidade].hora_fim.strftime("%H:%M") %></p>
-
-            <% if item[:status] == 'Ocupado' %>
-              <p class="text-danger"><strong>Ocupado</strong></p>
-            <% else %>
-              <%= link_to 'Agendar', new_agendamento_path(
-                  disponibilidade_id: item[:disponibilidade].id,
-                  data: item[:disponibilidade].data,
-                  hora_inicio: item[:disponibilidade].hora_inicio,
-                  hora_fim: item[:disponibilidade].hora_fim,
-                  consultor_id: @consultor.id,
-                  cliente_id: current_user.id
-                ), class: 'btn btn-primary' %>
+            <h4><%= data.strftime("%d/%m/%Y") %></h4>
+            
+            <% horarios.each do |item| %>
+              <p>
+                <strong><%= item[:disponibilidade].hora_inicio.strftime("%H:%M") %> às <%= item[:disponibilidade].hora_fim.strftime("%H:%M") %></strong>
+                <% if item[:status] == 'Ocupado' %>
+                  <span class="text-danger ml-2"><strong>Ocupado</strong></span>
+                <% else %>
+                  <%= link_to 'Agendar', new_agendamento_path(
+                      disponibilidade_id: item[:disponibilidade].id,
+                      data: item[:disponibilidade].data,
+                      hora_inicio: item[:disponibilidade].hora_inicio,
+                      hora_fim: item[:disponibilidade].hora_fim,
+                      consultor_id: @consultor.id,
+                      cliente_id: current_user.id
+                    ), class: 'btn btn-primary btn-sm ml-2' %>
+                <% end %>
+              </p>
             <% end %>
           </div>
         </div>

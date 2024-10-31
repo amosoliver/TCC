@@ -7,11 +7,11 @@ class User < ApplicationRecord
   has_many :agendamentos_as_consultor, foreign_key: 'consultor_id', class_name: 'Agendamento'
 
   # Validações
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
+  validates :nome, presence: true
   validates :especialidade_id, presence: true, if: :consultor?
-  
-  # Validações de senha
-  validates :password, presence: true, on: :create
-  validates :password, presence: true, if: :password_required?
+  validates :cidade_id, presence: true
+  validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

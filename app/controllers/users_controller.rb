@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   # GET /usuarios/new
   def new
-    @user = User.new
+    @user = User.new(consultor: params[:consultor] == "true")
   end
 
   # GET /usuarios/1/edit
@@ -26,18 +26,21 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to usuario_path(@user), notice: 'Usuário criado com sucesso.'
     else
-      render :new
+      flash.now[:alert] = @user.errors.full_messages.to_sentence # Exibe os erros e mantém a mensagem na mesma requisição
+      render :new # Renderiza a view 'new' para mostrar os erros
     end
   end
-
-  # PATCH/PUT /usuarios/1 or /usuarios/1.json
+  
   def update
     if @user.update(user_params)
       redirect_to usuario_path(@user), notice: 'Usuário atualizado com sucesso.'
     else
-      render :edit
+      flash.now[:alert] = @user.errors.full_messages.to_sentence # Exibe os erros e mantém a mensagem na mesma requisição
+      render :edit # Renderiza a view 'edit' para mostrar os erros
     end
   end
+  
+  
 
   # DELETE /usuarios/1 or /usuarios/1.json
   def destroy
