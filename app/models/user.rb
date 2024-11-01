@@ -9,7 +9,21 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # Validações
+  validates :email, presence: true
+  validates :nome, presence: true
+  validates :cidade_id, presence: true
+  validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
+  validates :especialidade, presence: true, if: :consultor?
+
+  def consultor?
+    consultor == true
+  end
+
+
   private
+
+
 
   def password_required?
     new_record? || password.present?

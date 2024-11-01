@@ -41,7 +41,9 @@
     <section>
       <% if flash[:alert] %>
         <div class="alert alert-warning mt-3" role="alert">
-          <%= flash[:alert] %>
+          <% flash[:alert].split(/,|;|\./).each do |msg| %>
+            <div><%= msg.strip %></div>
+          <% end %>
         </div>
       <% end %>
       <%= yield %>   

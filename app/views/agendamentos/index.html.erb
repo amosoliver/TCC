@@ -1,29 +1,29 @@
-<div class="row">
-  <% @agendamentos.each do |data, agendamentos| %>
-    <div class="col-12 mb-4">
-      <h4><%= data.strftime("%d/%m/%Y") %></h4>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Agendamentos</h2>
     </div>
-    
-    <div class="col-12 mb-3">
-      <h5>Horários:</h5>
-    </div>
-    
-    <% agendamentos.each do |agendamento| %>
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
-        <div class="icon-box-agendamento">
-          <p>
-            <% if agendamento.cliente.present? %>
-              <strong><%= agendamento.cliente.nome %>:</strong> 
-              <%= agendamento.hora_inicio.strftime("%H:%M") %> - 
-              <%= agendamento.hora_fim.strftime("%H:%M") %>
-            <% else %>
-              <strong>Cliente não disponível:</strong>
-              <%= agendamento.hora_inicio.strftime("%H:%M") %> - 
-              <%= agendamento.hora_fim.strftime("%H:%M") %>
+
+    <div class="row">
+      <% @agendamentos.each do |data, agendamentos| %>
+        <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box-agendamento">
+            <h4><%= data.strftime("%d/%m/%Y") %></h4> <!-- Cabeçalho para a data -->
+            <% agendamentos.each do |agendamento| %>
+              <p><strong>Cliente:</strong> <%= agendamento.cliente.nome %></p>
+              <p>
+                <strong>Horário:</strong> 
+                <%= agendamento.hora_inicio.strftime("%H:%M") %> - 
+                <%= agendamento.hora_fim.strftime("%H:%M") %>
+              </p>
             <% end %>
-          </p>
+          </div>
         </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+      <% end %>
+    </div>
+
+    <div class="text-center mt-4">
+      <%= link_to "Novo Agendamento", new_agendamento_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</section>
