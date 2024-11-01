@@ -9,9 +9,8 @@ class User < ApplicationRecord
   # Validações
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   validates :nome, presence: true
-  validates :especialidade_id, presence: true, if: :consultor?
-  validates :cidade_id, presence: true
-  validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
+  validates :especialidade_id, presence: { message: "é obrigatório para consultores" }, if: :consultor?
+  validates :cidade_id, presence: { message: "é obrigatório" }  
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

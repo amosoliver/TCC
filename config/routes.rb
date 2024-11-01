@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   # Outras rotas
-  resources :users, as: 'usuarios' # Rota para usuários (administradores)
+  resources :users, as: 'usuarios' 
   resources :agendamentos
   resources :disponibilidade_consultors
   resources :cidades

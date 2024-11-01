@@ -155,4 +155,5 @@ pt-BR:
               blank: "não pode ficar em branco"
       messages:
         required: "é obrigatório"
-        not_saved: "Não foi possível salvar %{resource} devido a erros"
+        not_saved: "Não foi possível salvar %{resource}: %{errors}"
+

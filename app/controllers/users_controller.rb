@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
-  before_action :set_cidades_and_especialidades, only: %i[new create edit]
+  before_action :set_cidades_and_especialidades, only: %i[new create edit update]
 
   # GET /usuarios or /usuarios.json
   def index
