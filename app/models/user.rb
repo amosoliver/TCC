@@ -6,12 +6,6 @@ class User < ApplicationRecord
   has_many :disponibilidade_consultors, foreign_key: 'consultor_id', class_name: 'DisponibilidadeConsultor'
   has_many :agendamentos_as_consultor, foreign_key: 'consultor_id', class_name: 'Agendamento'
 
-  # Validações
-  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
-  validates :nome, presence: true
-  validates :especialidade_id, presence: { message: "é obrigatório para consultores" }, if: :consultor?
-  validates :cidade_id, presence: { message: "é obrigatório" }  
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
