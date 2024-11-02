@@ -24,6 +24,7 @@ Rails.application.configure do
   config.public_file_server.enabled = false
 
   # Do not fall back to assets pipeline if a precompiled asset is missed.
+# config/environments/production.rb
   config.assets.compile = false
   
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
