@@ -291,7 +291,7 @@ DEPENDENCIES
   devise
   importmap-rails
   jbuilder
-  net-protocol (~> 0.2)
+  net-pop
   pg
   puma (>= 5.0)
   rails (~> 7.1.4)
