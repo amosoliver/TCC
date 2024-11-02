@@ -11,12 +11,6 @@
       <div class="icon-box">
         <h4>
           <a href="<%= especialidade_path(especialidade) %>"><%= especialidade.nome %></a>
-
-<% if current_user.consultor === true %>
-    <div class="float-end">
-      <%= button_to '<i class="bi bi-pencil"></i>'.html_safe, edit_especialidade_path(especialidade), method: :get, class: 'btn btn-primary btn-sm', title: 'Editar', form: { class: 'd-inline' } %>
-    </div>
-<% end %>
         </h4>
         <p><%= especialidade.descricao %></p>
       </div>

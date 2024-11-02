@@ -27,10 +27,10 @@ end
   # POST /disponibilidade_consultors or /disponibilidade_consultors.json
   def create
     @disponibilidade_consultor = DisponibilidadeConsultor.new(disponibilidade_consultor_params)
-
+  
     respond_to do |format|
       if @disponibilidade_consultor.save
-        format.html { redirect_to @disponibilidade_consultor, notice: "Disponibilidade consultor was successfully created." }
+        format.html { redirect_back(fallback_location: root_path, notice: "Disponibilidade consultor was successfully created.") }
         format.json { render :show, status: :created, location: @disponibilidade_consultor }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,12 +38,13 @@ end
       end
     end
   end
+  
 
   # PATCH/PUT /disponibilidade_consultors/1 or /disponibilidade_consultors/1.json
   def update
     respond_to do |format|
       if @disponibilidade_consultor.update(disponibilidade_consultor_params)
-        format.html { redirect_to @disponibilidade_consultor, notice: "Disponibilidade consultor was successfully updated." }
+        format.html { redirect_back(fallback_location: root_path, notice: "Disponibilidade consultor was successfully updated.") }
         format.json { render :show, status: :ok, location: @disponibilidade_consultor }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,6 +52,7 @@ end
       end
     end
   end
+  
 
   # DELETE /disponibilidade_consultors/1 or /disponibilidade_consultors/1.json
   def destroy
