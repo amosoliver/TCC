@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .custom-container {
-  max-height: 400px; /* Defina a altura máxima desejada */
+  max-height: 500px; /* Defina a altura máxima desejada */
   overflow-y: auto;  /* Adiciona rolagem vertical se o conteúdo exceder a altura máxima */
   margin: 0 auto;    /* Centraliza o container, se necessário */
   padding: 15px;     /* Adiciona espaçamento interno */
@@ -1130,6 +1130,8 @@ section {
   border-radius: 5px;
   background: #fff;
   transition: 0.5s;
+  margin-bottom: 20px !important; 
+
 }
 
 .team .member .pic {
