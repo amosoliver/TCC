@@ -96,14 +96,64 @@ pt-BR:
         updated_at: "Atualizado em"
         current_password: "Senha Atual"
 
-  errors:
-    messages:
-      required: "é obrigatório"
-      not_saved: "Não foi possível salvar %{resource} devido a erros"
-      blank: "não pode ficar em branco"
-      taken: "já está em uso"
-    models:
-      user:
-        attributes:
-          email:
-            taken: "E-mail já está em uso"
+    errors:
+      models:
+        Agendamento:
+          attributes:
+            cliente_id:
+              blank: "não pode ficar em branco"
+            consultor_id:
+              blank: "não pode ficar em branco"
+            data:
+              blank: "não pode ficar em branco"
+            hora_inicio:
+              blank: "não pode ficar em branco"
+            hora_fim:
+              blank: "não pode ficar em branco"
+        Area:
+          attributes:
+            nome:
+              blank: "não pode ficar em branco"
+            descricao:
+              blank: "não pode ficar em branco"
+        Cidade:
+          attributes:
+            descricao:
+              blank: "não pode ficar em branco"
+        DisponibilidadeConsultor:
+          attributes:
+            consultor_id:
+              blank: "não pode ficar em branco"
+            data:
+              blank: "não pode ficar em branco"
+            hora_inicio:
+              blank: "não pode ficar em branco"
+            hora_fim:
+              blank: "não pode ficar em branco"
+        Especialidade:
+          attributes:
+            nome:
+              blank: "não pode ficar em branco"
+            descricao:
+              blank: "não pode ficar em branco"
+            area_id:
+              blank: "não pode ficar em branco"
+        user:
+          attributes:
+            email:
+              blank: "não pode ficar em branco"
+              invalid: "não é um e-mail válido"
+              taken: "já está em uso"
+            nome:
+              blank: "não pode ficar em branco"
+            cidade_id:
+              blank: "não pode ficar em branco"
+            password:
+              blank: "não pode ficar em branco"
+              too_short: "deve ter pelo menos %{count} caracteres"
+            password_confirmation:
+              blank: "não pode ficar em branco"
+      messages:
+        required: "é obrigatório"
+        not_saved: "Não foi possível salvar %{resource}: %{errors}"
+

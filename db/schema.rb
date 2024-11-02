@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_30_174509) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_01_010738) do
   create_table "agendamentos", force: :cascade do |t|
     t.integer "cliente_id"
     t.integer "consultor_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_30_174509) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "agendamentos", "disponibilidade_consultors", column: "disponibilidade_id"
   add_foreign_key "agendamentos", "users", column: "cliente_id"
   add_foreign_key "agendamentos", "users", column: "consultor_id"
   add_foreign_key "disponibilidade_consultors", "users", column: "consultor_id"

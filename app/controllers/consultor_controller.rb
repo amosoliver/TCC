@@ -14,17 +14,16 @@ class ConsultorController < ApplicationController
       return
     end
   
-    # Carrega as disponibilidades do consultor
+    # Carrega as disponibilidades do consultor ordenadas por data e hora
     disponibilidades = @consultor.disponibilidade_consultors.order(:data, :hora_inicio)
-    # Carrega os agendamentos do consultor para marcar os horários ocupados
-    agendamentos = @consultor.agendamentos.group_by { |a| [a.data, a.hora_inicio] }
-  
-    # Marca as disponibilidades como 'Ocupado' ou 'Agendar' para exibição na view
+    
+    # Mapeia as disponibilidades e verifica o status 'Ocupado' ou 'Agendar'
     @resultado = disponibilidades.map do |disponibilidade|
-      status = agendamentos.key?([disponibilidade.data, disponibilidade.hora_inicio]) ? 'Ocupado' : 'Agendar'
+      status = Agendamento.exists?(disponibilidade_id: disponibilidade.id) ? 'Ocupado' : 'Agendar'
       { disponibilidade: disponibilidade, status: status }
     end
   end
+  
   
   
   

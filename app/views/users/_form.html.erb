@@ -1,30 +1,22 @@
-<%= form_with(model: @user, url: @user.new_record? ? usuarios_path : usuario_path(@user), local: true, class: "centered-form") do |form| %>
-  <% if @user.errors.any? %>
-    <div class="alert alert-danger">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |error| %>
-          <li><%= error %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+
+
+<%= form_with(model: @user, url: @user.new_record? ? usuarios_path : usuario_path(@user), local: true, class: "centered-form", html: { novalidate: true }) do |form| %>
 
   <div class="form-row justify-content-center">
     <div class="col-md-12">
       <div class="text-left">
         <%= form.label :email %>
-        <%= form.email_field :email, required: true, class: "form-control" %>
+        <%= form.email_field :email, class: "form-control" %>
       </div>
 
       <div class="text-left">
         <%= form.label :nome %>
-        <%= form.text_field :nome, required: true, class: "form-control" %>
+        <%= form.text_field :nome, class: "form-control" %>
       </div>
 
       <div class="form-check form-check-inline text-left">
-        <%= form.label :consultor, "Consultor", class: "form-check-label me-2" %>
-        <%= form.check_box :consultor, class: "form-check-input", id: "consultor-checkbox" %>
+        <%= form.check_box :consultor, id: "consultor-checkbox" %>
+        <%= form.label :consultor, "Consultor", class: "form-check-label" %>
       </div>
 
       <div class="text-left" id="especialidade-field" style="display: none;">
@@ -39,23 +31,23 @@
 
       <% if @user.new_record? %>
         <div class="text-left">
-          <%= form.label :password %>
-          <%= form.password_field :password, required: true, class: "form-control" %>
-        </div>
-
-        <div class="text-left">
-          <%= form.label :password_confirmation %>
-          <%= form.password_field :password_confirmation, required: true, class: "form-control" %>
-        </div>
-      <% else %>
-        <div class="text-left">
-          <p>Se você deseja alterar a senha, por favor, insira uma nova abaixo:</p>
-          <%= form.label :password %>
+          <%= form.label :password, "Senha" %>
           <%= form.password_field :password, class: "form-control" %>
         </div>
 
         <div class="text-left">
-          <%= form.label :password_confirmation %>
+          <%= form.label :password_confirmation, "Confirmação de Senha" %>
+          <%= form.password_field :password_confirmation, class: "form-control" %>
+        </div>
+      <% else %>
+        <div class="text-left">
+          <p>Se você deseja alterar a senha, por favor, insira uma nova abaixo:</p>
+          <%= form.label :password, "Senha" %>
+          <%= form.password_field :password, class: "form-control" %>
+        </div>
+
+        <div class="text-left">
+          <%= form.label :password_confirmation, "Confirmação de Senha" %>
           <%= form.password_field :password_confirmation, class: "form-control" %>
         </div>
       <% end %>
@@ -83,6 +75,17 @@
       } else {
         $('#especialidade-field').hide();
       }
+    });
+
+    // Exibir campo se a página carregar com consultor marcado
+    if ($('#consultor-checkbox').is(':checked')) {
+      $('#especialidade-field').show();
+    }
+
+    // Remover validação do formulário
+    $('form').on('submit', function(event) {
+      event.preventDefault(); // Impede o comportamento padrão de validação
+      this.submit(); // Envia o formulário manualmente
     });
   });
 </script>

@@ -3,7 +3,12 @@ class DisponibilidadeConsultorsController < ApplicationController
 
   # GET /disponibilidade_consultors or /disponibilidade_consultors.json
   def index
-    @disponibilidade_consultors = DisponibilidadeConsultor.all
+# Primeiro, verifique se o usuário está logado e é um consultor
+if user_signed_in? && current_user.consultor?
+  @disponibilidade_consultors = DisponibilidadeConsultor.where(consultor_id: current_user.id)
+else
+  @disponibilidade_consultors = DisponibilidadeConsultor.none # Retorna uma coleção vazia se não for consultor
+end
   end
 
   # GET /disponibilidade_consultors/1 or /disponibilidade_consultors/1.json

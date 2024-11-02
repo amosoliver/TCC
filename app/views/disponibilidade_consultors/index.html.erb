@@ -1,45 +1,32 @@
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Disponibilidade</h2>
+    </div>
 
+    <div class="row">
+      <% @disponibilidade_consultors.each do |disponibilidade_consultor| %>
+        <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box">
+            <h4>
+              <a href="<%= disponibilidade_consultor_path(disponibilidade_consultor) %>"><%= disponibilidade_consultor.consultor.nome %></a>
 
-
-
-   <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Disponibilidade</h2>
+              <% if current_user.consultor? %>
+                <div class="float-end">
+                  <%= button_to '<i class="bi bi-pencil"></i>'.html_safe, edit_disponibilidade_consultor_path(disponibilidade_consultor), method: :get, class: 'btn btn-primary btn-sm', title: 'Editar', form: { class: 'd-inline' } %>
+                </div>
+              <% end %>
+            </h4>
+            <p>Data: <%= disponibilidade_consultor.data %></p>
+            <p>Hora de Início: <%= disponibilidade_consultor.hora_inicio.strftime("%H:%M") %></p>
+            <p>Hora de Fim: <%= disponibilidade_consultor.hora_fim.strftime("%H:%M") %></p>
+          </div>
         </div>
+      <% end %>
+    </div>  
+  </div>
+</section>
 
-<div class="row">
-  <% @disponibilidade_consultors.each do |disponibilidade_consultor| %>
-    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
-      <div class="icon-box">
-        <h4>
-          <a href="<%= disponibilidade_consultor_path(disponibilidade_consultor) %>"><%= disponibilidade_consultor.user.nome %></a>
-
-<% if current_user.consultor === true %>
-    <div class="float-end">
-      <%= button_to '<i class="bi bi-pencil"></i>'.html_safe, edit_disponibilidade_consultor_path(disponibilidade_consultor), method: :get, class: 'btn btn-primary btn-sm', title: 'Editar', form: { class: 'd-inline' } %>
-    </div>
+<% if current_user&.consultor? %>
+  <%= link_to "Nova Disponibilidade", new_disponibilidade_consultor_path, class: 'btn btn-primary' %> 
 <% end %>
-        </h4>
-      </div>
-    </div>
-  <% end %>
-</div>  
-
-        
-      </div>
-    </section>  
-    <% if current_user&.consultor? %>
-    <%= link_to "New disponibilidade_consultor", new_disponibilidade_consultor_path, class: 'btn btn-primary' %> 
-    <% end %>
-
-
-
-
-
-
-
-
-
-
