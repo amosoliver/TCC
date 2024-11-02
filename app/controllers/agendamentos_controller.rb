@@ -3,11 +3,19 @@ class AgendamentosController < ApplicationController
 
   # GET /agendamentos or /agendamentos.json
   def index
-    @agendamentos = current_user.agendamentos
-      .includes(:cliente)
-      .where.not(hora_inicio: nil, hora_fim: nil)
-      .group_by { |agendamento| agendamento.data.to_date }
+    if current_user.consultor?
+      @agendamentos = current_user.agendamentos
+        .includes(:cliente)
+        .where.not(hora_inicio: nil, hora_fim: nil)
+        .group_by { |agendamento| agendamento.data.to_date }
+    else
+      # Aqui você pode definir como buscar os agendamentos para outros tipos de usuários
+      @agendamentos = Agendamento.includes(:cliente)
+        .where.not(hora_inicio: nil, hora_fim: nil)
+        .group_by { |agendamento| agendamento.data.to_date }
+    end
   end
+  
   
   # GET /agendamentos/1 or /agendamentos/1.json
   def show
