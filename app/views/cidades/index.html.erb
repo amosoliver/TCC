@@ -1,14 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <p style="color: green"><%= notice %></p> <!-- Mensagem de notificação -->
 
-<h1>Cidades</h1>
+    <div class="section-title">
+      <h2>Cidades</h2>
+    </div>
 
-<div id="cidades">
-  <% @cidades.each do |cidade| %>
-    <%= render cidade %>
-    <p>
-      <%= link_to "Show this cidade", cidade %>
-    </p>
-  <% end %>
-</div>
+    <div class="row" id="cidades">
+      <% @cidades.each do |cidade| %>
+        <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box-agendamento">
+            <h4>
+              <%= link_to cidade.descricao, cidade %> <!-- Descrição da cidade com link -->
+            </h4>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
-<%= link_to "New cidade", new_cidade_path %>
+  </div>
+</section>

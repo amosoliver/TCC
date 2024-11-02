@@ -1,10 +1,33 @@
-<p style="color: green"><%= notice %></p>
+<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Consultores</h2>
+    </div>
 
-<%= render @cidade %>
-
-<div>
-  <%= link_to "Edit this cidade", edit_cidade_path(@cidade) %> |
-  <%= link_to "Back to cidades", cidades_path %>
-
-  <%= button_to "Destroy this cidade", @cidade, method: :delete %>
-</div>
+    <div class="row">
+      <% if @consultores.empty? %>
+        <div class="col-12 text-center">
+          <p>Não há consultores disponíveis no momento.</p>
+        </div>
+      <% else %>
+        <% @consultores.each do |consultor| %>
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <h4><a href="<%= consultor_path(consultor) %>"><%= consultor.nome %></a></h4>
+              <p><strong>Email:</strong> <%= consultor.email %></p>
+              <p><strong>Consultor:</strong> <%= consultor.consultor ? 'Sim' : 'Não' %></p>
+              
+              <% if consultor.consultor %>
+                <p><strong>Especialidade:</strong> <%= consultor.especialidade.nome %></p>
+              <% end %>
+              
+              <p><strong>Cidade:</strong> <%= consultor.cidade.descricao %></p>
+              <p><strong>Data de Criação:</strong> <%= consultor.created_at.strftime("%d/%m/%Y") %></p>
+              <p><strong>Última Atualização:</strong> <%= consultor.updated_at.strftime("%d/%m/%Y") %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>

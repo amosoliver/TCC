@@ -8,7 +8,13 @@ class CidadesController < ApplicationController
 
   # GET /cidades/1 or /cidades/1.json
   def show
+# Supondo que o id da cidade é passado na URL
+    cidade_id = params[:id]
+    @cidade = Cidade.find(cidade_id)
+    # Filtrando os consultores onde consultor é true
+    @consultores = @cidade.consultores.where(consultor: true)         
   end
+  
 
   # GET /cidades/new
   def new

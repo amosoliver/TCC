@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   # GET /usuarios or /usuarios.json
   def index
-    @users = User.all
+    @users = User.where(id: current_user.id) # Filtra para o usuário logado
   end
 
   # GET /usuarios/1 or /usuarios/1.json
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to usuario_path(@user), notice: 'Usuário criado com sucesso.'
+      redirect_to new_user_session_path, notice: 'Usuário criado com sucesso.'
     else
       flash.now[:alert] = @user.errors.full_messages.to_sentence # Exibe os erros e mantém a mensagem na mesma requisição
       render :new # Renderiza a view 'new' para mostrar os erros
@@ -33,12 +33,13 @@ class UsersController < ApplicationController
   
   def update
     if @user.update(user_params)
-      redirect_to usuario_path(@user), notice: 'Usuário atualizado com sucesso.'
+      redirect_back(fallback_location: usuario_path(@user), notice: 'Usuário atualizado com sucesso.')
     else
       flash.now[:alert] = @user.errors.full_messages.to_sentence # Exibe os erros e mantém a mensagem na mesma requisição
       render :edit # Renderiza a view 'edit' para mostrar os erros
     end
   end
+  
   
   
 

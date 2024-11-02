@@ -40,18 +40,18 @@ class AgendamentosController < ApplicationController
   # POST /agendamentos or /agendamentos.json
   def create
     @agendamento = Agendamento.new(agendamento_params)
-
+  
     respond_to do |format|
       if @agendamento.save
         format.html { redirect_to @agendamento, notice: "Agendamento was successfully created." }
         format.json { render :show, status: :created, location: @agendamento }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_back(fallback_location: new_agendamento_path, alert: "Failed to create Agendamento.") }
         format.json { render json: @agendamento.errors, status: :unprocessable_entity }
       end
     end
   end
-
+  
   # PATCH/PUT /agendamentos/1 or /agendamentos/1.json
   def update
     respond_to do |format|
@@ -59,11 +59,13 @@ class AgendamentosController < ApplicationController
         format.html { redirect_to @agendamento, notice: "Agendamento was successfully updated." }
         format.json { render :show, status: :ok, location: @agendamento }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_back(fallback_location: edit_agendamento_path(@agendamento), alert: "Failed to update Agendamento.") }
         format.json { render json: @agendamento.errors, status: :unprocessable_entity }
       end
     end
   end
+  
+  
 
   # DELETE /agendamentos/1 or /agendamentos/1.json
   def destroy
