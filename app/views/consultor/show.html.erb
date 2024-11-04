@@ -16,40 +16,42 @@
     <% end %>
 
     <!-- Agrupa as disponibilidades por data -->
-    <div class="row">
-      <% @resultado.group_by { |item| item[:disponibilidade].data }.each do |data, horarios| %>
-        <div class="col-md-3 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
-          <div class="icon-box-agendamento">
-            <h4><%= data.strftime("%d/%m/%Y") %></h4>
+    <!-- Agrupa as disponibilidades por data -->
+<div class="row">
+  <% @resultado.group_by { |item| item[:disponibilidade].data }.each do |data, horarios| %>
+    <div class="col-md-3 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+      <div class="icon-box-agendamento">
+        <h4><%= data.strftime("%d/%m/%Y") %></h4>
 
-            <% horarios.each do |item| %>
-              <p>
-                <strong><%= item[:disponibilidade].hora_inicio.strftime("%H:%M") %> às <%= item[:disponibilidade].hora_fim.strftime("%H:%M") %></strong>
-                <% if item[:status] == 'Ocupado' %>
-                  <% if item[:cliente_id] && item[:cliente_id] == current_user.id %>
-                    <span class="text-success ml-2"><strong><%= current_user.nome %></strong></span>
-                  <% else %>
-                    <span class="text-danger ml-2"><strong>Ocupado</strong></span>
-                  <% end %>
-                <% else %>
-                  <% if current_user.consultor %>
-                    <span class="btn btn-success btn-sm ml-2">Vago</span>
-                  <% else %>
-                    <%= link_to 'Agendar', new_agendamento_path(
-                        disponibilidade_id: item[:disponibilidade].id,
-                        data: item[:disponibilidade].data,
-                        hora_inicio: item[:disponibilidade].hora_inicio,
-                        hora_fim: item[:disponibilidade].hora_fim,
-                        consultor_id: @consultor.id,
-                        cliente_id: current_user.id
-                      ), class: 'btn btn-primary btn-sm ml-2' %>
-                  <% end %>
-                <% end %>
-              </p>
+        <% horarios.each do |item| %>
+          <p>
+            <strong><%= item[:disponibilidade].hora_inicio.strftime("%H:%M") %> às <%= item[:disponibilidade].hora_fim.strftime("%H:%M") %></strong>
+            <% if item[:status] == 'Ocupado' %>
+              <% if item[:cliente_id] == current_user.id %>
+                <span class="text-success ml-2"><strong><%= current_user.nome %></strong></span>
+              <% else %>
+                <span class="text-danger ml-2"><strong>Ocupado</strong></span>
+              <% end %>
+            <% else %>
+              <% if current_user.consultor %>
+                <span class="btn btn-success btn-sm ml-2">Vago</span>
+              <% else %>
+                <%= link_to 'Agendar', new_agendamento_path(
+                    disponibilidade_id: item[:disponibilidade].id,
+                    data: item[:disponibilidade].data,
+                    hora_inicio: item[:disponibilidade].hora_inicio,
+                    hora_fim: item[:disponibilidade].hora_fim,
+                    consultor_id: @consultor.id,
+                    cliente_id: current_user.id
+                  ), class: 'btn btn-primary btn-sm ml-2' %>
+              <% end %>
             <% end %>
-          </div>
-        </div>
-      <% end %>
+          </p>
+        <% end %>
+      </div>
     </div>
+  <% end %>
+</div>
+
   </div>
 </section>
