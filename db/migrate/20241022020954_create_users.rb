@@ -12,6 +12,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :nome      # Adicionando campo nome
       t.text :descricao   # Adicionando campo descrição
       t.string :foto      # Adicionando campo foto
+      t.string :telefone   # Adicionando campo telefone
       t.timestamps
     end
   end

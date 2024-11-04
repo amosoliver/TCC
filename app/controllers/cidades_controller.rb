@@ -1,4 +1,6 @@
 class CidadesController < ApplicationController
+  before_action :authenticate_user! # Exige autenticação
+  before_action :restrict_access_for_consultor, except: [:index, :show] # Restringe se for consultor
   before_action :set_cidade, only: %i[ show edit update destroy ]
 
   # GET /cidades or /cidades.json
@@ -72,5 +74,10 @@ class CidadesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def cidade_params
       params.require(:cidade).permit(:descricao)
+    end
+    def restrict_access_for_consultor
+      if !current_user.consultor
+        redirect_to cidades_path, alert: "Acesso restrito para consultor"
+      end
     end
 end

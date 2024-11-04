@@ -1,5 +1,7 @@
 class AreasController < ApplicationController
-  before_action :set_area, only: %i[ show edit update destroy ]
+  before_action :authenticate_user! # Exige autenticação
+  before_action :restrict_access_for_consultor, except: [:index, :show] # Restringe se for consultor
+  before_action :set_area, only: %i[show edit update destroy]
 
   # GET /areas or /areas.json
   def index
@@ -59,13 +61,21 @@ class AreasController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_area
       @area = Area.find(params[:id])
     end
 
+    # Restrict access for consultors
+    def restrict_access_for_consultor
+      if !current_user.consultor
+        redirect_to areas_path, alert: "Acesso restrito para consultor"
+      end
+    end
+
     # Only allow a list of trusted parameters through.
     def area_params
-      params.require(:area).permit(:descricao,:nome)
+      params.require(:area).permit(:descricao, :nome)
     end
 end

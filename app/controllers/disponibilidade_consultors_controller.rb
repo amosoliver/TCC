@@ -1,15 +1,16 @@
 class DisponibilidadeConsultorsController < ApplicationController
   before_action :set_disponibilidade_consultor, only: %i[ show edit update destroy ]
-
+  before_action :authenticate_user! # Exige autenticação
+  before_action :restrict_access_for_consultor, except: [:index, :show] # Restringe se for consultor
   # GET /disponibilidade_consultors or /disponibilidade_consultors.json
   def index
-# Primeiro, verifique se o usuário está logado e é um consultor
-if user_signed_in? && current_user.consultor?
-  @disponibilidade_consultors = DisponibilidadeConsultor.where(consultor_id: current_user.id)
-else
-  @disponibilidade_consultors = DisponibilidadeConsultor.none # Retorna uma coleção vazia se não for consultor
-end
+    if user_signed_in? && current_user.consultor?
+      @disponibilidade_consultors = DisponibilidadeConsultor.where(consultor_id: current_user.id).group_by { |d| d.data }
+    else
+      @disponibilidade_consultors = {}
+    end
   end
+  
 
   # GET /disponibilidade_consultors/1 or /disponibilidade_consultors/1.json
   def show
@@ -73,5 +74,11 @@ end
     # Only allow a list of trusted parameters through.
     def disponibilidade_consultor_params
       params.require(:disponibilidade_consultor).permit(:consultor_id, :data, :hora_inicio, :hora_fim)
+    end
+
+    def restrict_access_for_consultor
+      if !current_user.consultor
+        redirect_to disponibilidade_consultors_path, alert: "Acesso restrito para consultor"
+      end
     end
 end

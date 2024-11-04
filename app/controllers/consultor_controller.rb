@@ -1,6 +1,7 @@
 class ConsultorController < ApplicationController
   before_action :set_consultor, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user! # Exige autenticação
+  before_action :restrict_access_for_consultor, except: [:index, :show] # Restringe se for consultor
   def index
     # Exibe apenas usuários que são consultores
     @consultores = User.where(consultor: true)
@@ -72,5 +73,11 @@ class ConsultorController < ApplicationController
   def consultor_params
     # Permite apenas parâmetros permitidos para um consultor
     params.require(:user).permit(:nome, :email, :especialidade_id, :cidade_id, :descricao, :foto, :consultor)
+  end
+
+  def restrict_access_for_consultor
+    if !current_user.consultor
+      redirect_to consultors_path, alert: "Acesso restrito para consultor"
+    end
   end
 end

@@ -1,6 +1,7 @@
 class EspecialidadesController < ApplicationController
   before_action :set_especialidade, only: %i[ show edit update destroy ]
-
+  before_action :authenticate_user! # Exige autenticação
+  before_action :restrict_access_for_consultor, except: [:index, :show] # Restringe se for consultor
   # GET /especialidades or /especialidades.json
   def index
     @especialidades = Especialidade.all
@@ -72,5 +73,11 @@ class EspecialidadesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def especialidade_params
       params.require(:especialidade).permit(:nome,:descricao, :area_id)
+    end
+
+    def restrict_access_for_consultor
+      if !current_user.consultor
+        redirect_to especialidades_path, alert: "Acesso restrito para consultor"
+      end
     end
 end

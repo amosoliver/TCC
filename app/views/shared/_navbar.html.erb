@@ -17,9 +17,8 @@
                     <% else %>
                         <li><a href="<%= especialidades_path %>">Especialidades</a></li>
                         <li><a href="<%= areas_path %>">Áreas</a></li>
-                        <li><a href="<%= usuarios_path %>">Usuários</a></li>
-                        <li><a href="<%= agendamentos_path %>">Agendamentos</a></li>
-                        <li><a href="<%= disponibilidade_consultors_path %>">Disponibilidade Consultores</a></li>
+                        <li><a href="<%= consultor_path(current_user.id) %>">Agendamentos</a></li>
+                        <li><a href="<%= disponibilidade_consultors_path %>">Disponibilidade</a></li>
                         <li><a href="<%= cidades_path %>">Cidades</a></li>
                     <% end %>
 

@@ -1,19 +1,12 @@
 class AgendamentosController < ApplicationController
+  before_action :authenticate_user!
+  
   before_action :set_agendamento, only: %i[ show edit update destroy ]
 
   # GET /agendamentos or /agendamentos.json
   def index
-    if current_user.consultor?
-      @agendamentos = current_user.agendamentos
-        .includes(:cliente)
-        .where.not(hora_inicio: nil, hora_fim: nil)
-        .group_by { |agendamento| agendamento.data.to_date }
-    else
-      # Aqui você pode definir como buscar os agendamentos para outros tipos de usuários
-      @agendamentos = Agendamento.includes(:cliente)
-        .where.not(hora_inicio: nil, hora_fim: nil)
-        .group_by { |agendamento| agendamento.data.to_date }
-    end
+    @agendamentos = current_user.agendamentos.includes(:cliente, :consultor).order(:data, :hora_inicio)
+    @agendamentos_por_data = @agendamentos.group_by { |agendamento| agendamento.data }
   end
   
   

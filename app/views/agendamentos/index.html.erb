@@ -5,14 +5,14 @@
     </div>
 
     <div class="row">
-      <% @agendamentos.each do |data, agendamentos| %>
+      <% @agendamentos_por_data.each do |data, agendamentos| %>
         <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
           <div class="icon-box-agendamento">
             <h4><%= data.strftime("%d/%m/%Y") %></h4> <!-- Cabeçalho para a data -->
             <% agendamentos.each do |agendamento| %>
               <p>
-                <strong><%= current_user.consultor? ? "Consultor:" : "Cliente:" %></strong> 
-                <%= current_user.consultor? ? agendamento.consultor&.nome : agendamento.cliente.nome %>
+                <strong><%= current_user.consultor? ? "Cliente:" : "Consultor:" %></strong> 
+                <%= current_user.consultor? ? agendamento.cliente.nome : agendamento.consultor&.nome %>
               </p>
               <p>
                 <strong>Horário:</strong> 
@@ -24,9 +24,6 @@
         </div>
       <% end %>
     </div>
-
-    <div class="text-center mt-4">
-      <%= link_to "Novo Agendamento", new_agendamento_path, class: 'btn btn-primary' %>
-    </div>
+  
   </div>
 </section>
