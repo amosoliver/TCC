@@ -1,6 +1,5 @@
 class AgendamentosController < ApplicationController
   before_action :authenticate_user!
-  
   before_action :set_agendamento, only: %i[ show edit update destroy ]
 
   # GET /agendamentos or /agendamentos.json
@@ -8,7 +7,6 @@ class AgendamentosController < ApplicationController
     @agendamentos = current_user.agendamentos.includes(:cliente, :consultor).order(:data, :hora_inicio)
     @agendamentos_por_data = @agendamentos.group_by { |agendamento| agendamento.data }
   end
-  
   
   # GET /agendamentos/1 or /agendamentos/1.json
   def show
@@ -22,11 +20,10 @@ class AgendamentosController < ApplicationController
       data: params[:data] ? Date.parse(params[:data]) : nil,
       hora_inicio: params[:hora_inicio] ? Time.zone.parse(params[:hora_inicio]) : nil,
       hora_fim: params[:hora_fim] ? Time.zone.parse(params[:hora_fim]) : nil,
-      disponibilidade_id: params[:disponibilidade_id] # Adicione esta linha
+      disponibilidade_id: params[:disponibilidade_id]
     )
   end
   
-
   def edit
   end
 
@@ -36,10 +33,10 @@ class AgendamentosController < ApplicationController
   
     respond_to do |format|
       if @agendamento.save
-        format.html { redirect_to @agendamento, notice: "Agendamento was successfully created." }
+        format.html { redirect_to consultor_path(@agendamento.consultor_id), notice: "Agendamento foi criado com sucesso." }
         format.json { render :show, status: :created, location: @agendamento }
       else
-        format.html { redirect_back(fallback_location: new_agendamento_path, alert: "Failed to create Agendamento.") }
+        format.html { redirect_back(fallback_location: new_agendamento_path, alert: "Falha ao criar Agendamento.") }
         format.json { render json: @agendamento.errors, status: :unprocessable_entity }
       end
     end
@@ -49,23 +46,21 @@ class AgendamentosController < ApplicationController
   def update
     respond_to do |format|
       if @agendamento.update(agendamento_params)
-        format.html { redirect_to @agendamento, notice: "Agendamento was successfully updated." }
+        format.html { redirect_to @agendamento, notice: "Agendamento foi atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @agendamento }
       else
-        format.html { redirect_back(fallback_location: edit_agendamento_path(@agendamento), alert: "Failed to update Agendamento.") }
+        format.html { redirect_back(fallback_location: edit_agendamento_path(@agendamento), alert: "Falha ao atualizar Agendamento.") }
         format.json { render json: @agendamento.errors, status: :unprocessable_entity }
       end
     end
   end
-  
-  
 
   # DELETE /agendamentos/1 or /agendamentos/1.json
   def destroy
     @agendamento.destroy!
 
     respond_to do |format|
-      format.html { redirect_to agendamentos_path, status: :see_other, notice: "Agendamento was successfully destroyed." }
+      format.html { redirect_to agendamentos_path, status: :see_other, notice: "Agendamento foi destruído com sucesso." }
       format.json { head :no_content }
     end
   end
@@ -80,5 +75,4 @@ class AgendamentosController < ApplicationController
     def agendamento_params
       params.require(:agendamento).permit(:cliente_id, :disponibilidade_id, :consultor_id, :data, :hora_inicio, :hora_fim)
     end
-    
-end 
+end
