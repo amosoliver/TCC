@@ -1,13 +1,13 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto"><a href="/">Proexpert</a></h1>
+        <h2 class="logo me-auto"><a href="/">Pro<strong>X</strong>pert</a></h2>
         
         <% if user_signed_in? %>
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a href="/">Home</a></li>
                     
                     <% if !current_user.consultor %>
+                        <li><a href="/">Home</a></li>
                         <li><a href="<%= especialidades_path %>">Especialidades</a></li>
                         <li><a href="<%= areas_path %>">Áreas</a></li>
                         <li><a href="<%= agendamentos_path %>">Agendamentos</a></li>
@@ -15,8 +15,6 @@
                         <li><a href="<%= cidades_path %>">Cidades</a></li>
 
                     <% else %>
-                        <li><a href="<%= especialidades_path %>">Especialidades</a></li>
-                        <li><a href="<%= areas_path %>">Áreas</a></li>
                         <li><a href="<%= consultor_path(current_user.id) %>">Agendamentos</a></li>
                         <li><a href="<%= disponibilidade_consultors_path %>">Disponibilidade</a></li>
                     <% end %>
