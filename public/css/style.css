@@ -384,9 +384,7 @@ h1, h2, h3, h4, h5, h6 {
   background: #37517e;
 }
 
-#hero .container {
-  padding-top: 72px;
-}
+
 
 #hero h1 {
   margin: 0 0 10px 0;
@@ -1670,11 +1668,13 @@ section {
 #footer {
   font-size: 14px;
   background: #37517e;
-  position: fixed; /* Faz o footer ficar fixo na tela */
+  position: fixed;
   left: 0;
-  bottom: 0; /* Fixa na parte inferior da página */
-  width: 100%; /* Para ocupar toda a largura da tela */
-  z-index: 1000; /* Certifique-se de que está acima de outros elementos */
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 80px; /* Altura fixa */
+  line-height: 80px; /* Centraliza verticalmente o texto */
 }
 
 

@@ -54,11 +54,12 @@ end
 
 # Criando alguns usuários (consultores e clientes)
 usuarios = [
-  { email: "cliente1@example.com", password: "password", consultor: false, especialidade_id: nil, cidade_id: Cidade.find_by(descricao: "São Paulo").id, nome: "João Silva", descricao: "Cliente de teste 1", foto: "cliente1.png" },
-  { email: "cliente2@example.com", password: "password", consultor: false, especialidade_id: nil, cidade_id: Cidade.find_by(descricao: "Rio de Janeiro").id, nome: "Maria Oliveira", descricao: "Cliente de teste 2", foto: "cliente2.png" },
-  { email: "consultor1@example.com", password: "password", consultor: true, especialidade_id: Especialidade.find_by(nome: "Desenvolvimento Web").id, cidade_id: Cidade.find_by(descricao: "São Paulo").id, nome: "Carlos Pereira", descricao: "Consultor de TI", foto: "consultor1.png" },
-  { email: "consultor2@example.com", password: "password", consultor: true, especialidade_id: Especialidade.find_by(nome: "Psicologia").id, cidade_id: Cidade.find_by(descricao: "Belo Horizonte").id, nome: "Ana Souza", descricao: "Psicóloga clínica", foto: "consultor2.png" }
+  { email: "cliente1@example.com", password: "password", consultor: false, especialidade_id: nil, cidade_id: Cidade.find_by(descricao: "São Paulo").id, nome: "João Silva", descricao: "Cliente de teste 1", foto: "cliente1.png", telefone: "11999999999" },
+  { email: "cliente2@example.com", password: "password", consultor: false, especialidade_id: nil, cidade_id: Cidade.find_by(descricao: "Rio de Janeiro").id, nome: "Maria Oliveira", descricao: "Cliente de teste 2", foto: "cliente2.png", telefone: "21999999999" },
+  { email: "consultor1@example.com", password: "password", consultor: true, especialidade_id: Especialidade.find_by(nome: "Desenvolvimento Web").id, cidade_id: Cidade.find_by(descricao: "São Paulo").id, nome: "Carlos Pereira", descricao: "Consultor de TI", foto: "consultor1.png", telefone: "31999999999" },
+  { email: "consultor2@example.com", password: "password", consultor: true, especialidade_id: Especialidade.find_by(nome: "Psicologia").id, cidade_id: Cidade.find_by(descricao: "Belo Horizonte").id, nome: "Ana Souza", descricao: "Psicóloga clínica", foto: "consultor2.png", telefone: "41999999999" }
 ]
+
 
 usuarios.each do |usuario|
   User.create!(usuario)

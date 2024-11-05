@@ -19,7 +19,6 @@
                         <li><a href="<%= areas_path %>">Áreas</a></li>
                         <li><a href="<%= consultor_path(current_user.id) %>">Agendamentos</a></li>
                         <li><a href="<%= disponibilidade_consultors_path %>">Disponibilidade</a></li>
-                        <li><a href="<%= cidades_path %>">Cidades</a></li>
                     <% end %>
 
                   <li class="dropdown">
@@ -43,6 +42,7 @@
         <% else %>
             <nav id="navbar" class="navbar">
                 <ul>
+                <li><a class="getstarted scrollto" href="<%= new_usuario_path %>">Cadastre-se</a></li>
                     <li><a class="getstarted scrollto" href="<%= new_user_session_path %>">Entrar</a></li>
                 </ul>
             </nav>
