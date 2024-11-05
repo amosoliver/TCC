@@ -58,6 +58,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_01_010738) do
     t.index ["area_id"], name: "index_especialidades_on_area_id"
   end
 
+  create_table "status_agendamentos", force: :cascade do |t|
+    t.string "descricao", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "encrypted_password"
@@ -70,6 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_01_010738) do
     t.string "nome"
     t.text "descricao"
     t.string "foto"
+    t.string "telefone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
