@@ -15,9 +15,10 @@
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :consultor_id, style: "display: block" %>
-        <%= form.select :consultor_id, User.where(consultor: true).collect { |u| [u.nome, u.id] }, { prompt: 'Selecione um Consultor' }, class: "form-control" %>
+        <%= form.hidden_field :consultor_id, value: current_user.id %>
       </div>
     </div>
+
 
     <div class="col-md-12">
       <div class="form-group">
