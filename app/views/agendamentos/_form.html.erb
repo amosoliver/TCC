@@ -21,16 +21,17 @@
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :cliente_id, style: "display: block" %>
-        <%= form.collection_select :cliente_id, User.all, :id, :nome, { include_blank: true, readonly: !agendamento.new_record? }, class: "form-control" %>
+        <%= form.collection_select :cliente_id, User.all, :id, :nome, { include_blank: true }, class: "form-control", disabled: !agendamento.new_record? %>
       </div>
     </div>
 
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :consultor_id, style: "display: block" %>
-        <%= form.collection_select :consultor_id, User.all, :id, :nome, { include_blank: true, readonly: !agendamento.new_record? }, class: "form-control" %>
+        <%= form.collection_select :consultor_id, User.all, :id, :nome, { include_blank: true }, class: "form-control", disabled: !agendamento.new_record? %>
       </div>
     </div>
+
 
     <div class="col-md-12">
       <div class="form-group">

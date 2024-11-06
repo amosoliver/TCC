@@ -1834,6 +1834,8 @@ section {
 
 #footer .copyright {
   float: left;
+  padding-top: -20px; /* Ajusta a posição vertical */
+
 }
 
 #footer .credits {

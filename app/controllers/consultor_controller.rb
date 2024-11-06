@@ -17,13 +17,16 @@ class ConsultorController < ApplicationController
   
     # Carrega as disponibilidades do consultor ordenadas por data e hora
     disponibilidades = @consultor.disponibilidade_consultors.order(:data, :hora_inicio)
-    
+  
     # Mapeia as disponibilidades e verifica o status 'Ocupado' ou 'Agendar'
     @resultado = disponibilidades.map do |disponibilidade|
-      status = Agendamento.exists?(disponibilidade_id: disponibilidade.id) ? 'Ocupado' : 'Agendar'
-      { disponibilidade: disponibilidade, status: status }
+      agendamento = Agendamento.find_by(disponibilidade_id: disponibilidade.id)
+      status = agendamento.present? ? 'Ocupado' : 'Agendar'
+      cliente = agendamento&.cliente # Assumindo que `cliente` é uma associação no modelo `Agendamento`
+      { disponibilidade: disponibilidade, status: status, cliente: cliente }
     end
   end
+  
   
   
   
