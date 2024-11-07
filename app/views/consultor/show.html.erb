@@ -32,9 +32,7 @@
                   <span class="btn btn-warning btn-sm ml-2"><strong>Cancelado</strong></span>
                 <% elsif item[:status] == 'Ocupado' %>
                   <% if current_user.consultor %>
-                    <span class="btn btn-info btn-sm ml-2">
-                      <strong><%= item[:cliente]&.nome || 'Desconhecido' %></strong>
-                    </span>
+                    <%= link_to item[:cliente]&.nome || 'Desconhecido', usuarios_path(cliente_id: item[:cliente]&.id), class: 'btn btn-info btn-sm ml-2' %>
                   <% elsif item[:cliente] && item[:cliente].id == current_user.id %>
                     <span class="btn btn-success btn-sm ml-2"><strong><%= current_user.nome %></strong></span>
                   <% else %>

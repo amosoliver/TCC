@@ -9,17 +9,20 @@
         <div class="col-xl-3 col-md-6 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
           <div class="icon-box">
             <h4>
-              <a href="<%= edit_usuario_path(user) %>"><%= user.nome %></a>
-
+              <% if user == current_user %>
+                <a href="<%= edit_usuario_path(user) %>"><%= user.nome %></a>
+              <% else %>
+                <%= user.nome %>
+              <% end %>
             </h4>
             <p><strong>Email:</strong> <%= user.email %></p>
+            <p><strong>Telefone:</strong> <%= user.telefone || 'N/A' %></p>
             
             <% if user.consultor %>
               <p><strong>Especialidade:</strong> <%= user.especialidade.nome %></p>
             <% end %>
             
             <p><strong>Cidade:</strong> <%= user.cidade&.descricao || 'N/A' %></p>
-
           </div>
         </div>
       <% end %>

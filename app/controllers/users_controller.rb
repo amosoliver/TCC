@@ -4,8 +4,13 @@ class UsersController < ApplicationController
 
   # GET /usuarios or /usuarios.json
   def index
-    @users = User.where(id: current_user.id) # Filtra para o usuário logado
+    if params[:cliente_id]
+      @users = User.where(id: params[:cliente_id])
+    else
+      @users = User.where(id: current_user.id)
+    end
   end
+  
 
   # GET /usuarios/1 or /usuarios/1.json
   def show
