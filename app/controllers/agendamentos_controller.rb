@@ -59,21 +59,22 @@ class AgendamentosController < ApplicationController
   def destroy
     # Encontre o agendamento
     @agendamento = Agendamento.find(params[:id])
-    
+  
     # Atualize o campo 'cancelado' para 'true'
     if @agendamento.update(cancelado: true)
       respond_to do |format|
-        format.html { redirect_to agendamentos_path, status: :see_other, notice: "Agendamento foi cancelado com sucesso." }
+        format.html { redirect_back(fallback_location: agendamentos_path, notice: "Agendamento foi cancelado com sucesso.") }
         format.json { render json: @agendamento, status: :ok }
       end
     else
       # Se a atualização falhar
       respond_to do |format|
-        format.html { redirect_to agendamentos_path, status: :unprocessable_entity, alert: "Erro ao cancelar o agendamento." }
+        format.html { redirect_back(fallback_location: agendamentos_path, alert: "Erro ao cancelar o agendamento.") }
         format.json { render json: @agendamento.errors, status: :unprocessable_entity }
       end
     end
   end
+  
   
 
   private
