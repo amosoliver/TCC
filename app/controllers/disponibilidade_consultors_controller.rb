@@ -28,19 +28,20 @@ class DisponibilidadeConsultorsController < ApplicationController
 
   def create
     @disponibilidade_consultor = DisponibilidadeConsultor.new(disponibilidade_consultor_params)
-
+  
     respond_to do |format|
       if @disponibilidade_consultor.save
         flash[:notice] = "Disponibilidade consultor foi criada com sucesso."
         format.html { redirect_to disponibilidade_consultors_path }
         format.json { render :show, status: :created, location: @disponibilidade_consultor }
       else
-        flash.now[:alert] = "Erro ao criar disponibilidade consultor. Verifique os dados e tente novamente."
+        flash.now[:alert] = @disponibilidade_consultor.errors.full_messages.to_sentence
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @disponibilidade_consultor.errors, status: :unprocessable_entity }
       end
     end
   end
+  
 
   def update
     respond_to do |format|

@@ -1,15 +1,5 @@
 <%= form_with(model: disponibilidade_consultor, local: true, class: "centered-form") do |form| %>
-  <% if disponibilidade_consultor.errors.any? %>
-    <div class="alert alert-danger">
-      <h2><%= pluralize(disponibilidade_consultor.errors.count, "error") %> prohibited this disponibilidade_consultor from being saved:</h2>
-      <ul>
-        <% disponibilidade_consultor.errors.full_messages.each do |error| %>
-          <li><%= error %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+ 
   <div class="form-row justify-content-center">
 
     <div class="col-md-12">
@@ -17,7 +7,6 @@
         <%= form.hidden_field :consultor_id, value: current_user.id %>
       </div>
     </div>
-
 
     <div class="col-md-12">
       <div class="form-group">
@@ -29,14 +18,14 @@
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :hora_inicio, style: "display: block" %>
-        <%= form.time_field :hora_inicio, class: "form-control" %>
+        <%= form.time_field :hora_inicio, class: "form-control", id: "hora_inicio" %>
       </div>
     </div>
 
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :hora_fim, style: "display: block" %>
-        <%= form.time_field :hora_fim, class: "form-control" %>
+        <%= form.time_field :hora_fim, class: "form-control", id: "hora_fim" %>
       </div>
     </div>
 
@@ -53,3 +42,24 @@
     </div>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const horaInicioField = document.getElementById("hora_inicio");
+    const horaFimField = document.getElementById("hora_fim");
+
+    horaInicioField.addEventListener("change", function() {
+      const horaInicio = horaInicioField.value;
+      if (horaInicio) {
+        const [hours, minutes] = horaInicio.split(":").map(Number);
+        const horaFim = new Date();
+        horaFim.setHours(hours + 1); // Define para uma hora depois
+        horaFim.setMinutes(minutes);
+
+        // Formata a nova hora_fim para HH:MM
+        const horaFimFormatted = horaFim.toTimeString().slice(0, 5);
+        horaFimField.value = horaFimFormatted;
+      }
+    });
+  });
+</script>

@@ -1,5 +1,5 @@
+<% if !user_signed_in? || (user_signed_in? && !current_user.consultor?) %>
   <section id="hero" class="d-flex align-items-center">
-
     <div class="container">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
@@ -14,7 +14,6 @@
         </div>
       </div>
     </div>
-
   </section><!-- End Hero -->
 
   <main id="main">
@@ -22,43 +21,38 @@
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
-
         <div class="section-title">
           <h2>Quem somos</h2>
         </div>
-
         <div class="row content">
           <p class="fs-2 text-center">A ProXpert nasceu com a missão de transformar a ​maneira como as empresas acessam consultorias ​especializadas. Fundada por um grupo de profissionais ​com vasta experiência em diferentes setores, a ​empresa surgiu da visão de oferecer mais do que ​soluções convencionais — seu objetivo é inspirar ​mudanças reais, ajudando organizações a superar ​desafios e alcançar seu pleno potencial.</p>
         </div>
-
       </div>
     </section><!-- End About Us Section -->
 
     <!-- ======= Services Section ======= -->
- <% if !user_signed_in? %>
-<section id="services" class="services section-bg">
-  <div class="container" data-aos="fade-up">
-    <div class="section-title">
-      <h2>Registre-se e agende sua consultoria com os melhores especialistas.</h2>
-    </div>
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Registre-se e agende sua consultoria com os melhores especialistas.</h2>
+        </div>
 
-    <div class="row justify-content-center text-center">
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mx-auto" data-aos="zoom-in" data-aos-delay="100">
-        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-          <ion-icon name="person-outline" style="width: 50px; height: 50px;"></ion-icon>
-          <h4><a href="<%= new_usuario_path(role: 'consultante') %>">Consultante</a></h4>
+        <div class="row justify-content-center text-center">
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mx-auto" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+              <ion-icon name="person-outline" style="width: 50px; height: 50px;"></ion-icon>
+              <h4><a href="<%= new_usuario_path(role: 'consultante') %>">Consultante</a></h4>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mx-auto" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+              <ion-icon name="school-outline" style="width: 50px; height: 50px;"></ion-icon>
+              <h4><a href="<%= new_usuario_path(role: 'consultor', consultor: true) %>">Consultor</a></h4>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mx-auto" data-aos="zoom-in" data-aos-delay="100">
-        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-          <ion-icon name="school-outline" style="width: 50px; height: 50px;"></ion-icon>
-          <h4><a href="<%= new_usuario_path(role: 'consultor', consultor: true) %>">Consultor</a></h4>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section><!-- End Services Section -->
+  </main>
 <% end %>
-
-</main>

@@ -1,15 +1,5 @@
 
 <%= form_with(model: area, local: true, class: "centered-form") do |form| %>
-  <% if area.errors.any? %>
-    <div class="alert alert-danger">
-      <h2><%= pluralize(area.errors.count, "error") %> prohibited this area from being saved:</h2>
-      <ul>
-        <% area.errors.full_messages.each do |error| %>
-          <li><%= error %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="form-row justify-content-center">
 

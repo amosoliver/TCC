@@ -1,60 +1,53 @@
 <%= form_with(model: agendamento, local: true, class: "centered-form") do |form| %>
-  <% if agendamento.errors.any? %>
-    <div class="alert alert-danger">
-      <h2><%= pluralize(agendamento.errors.count, "error") %> prohibited this agendamento from being saved:</h2>
-      <ul>
-        <% agendamento.errors.full_messages.each do |error| %>
-          <li><%= error %></li>
-        <% end %>
-      </ul>
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= form.hidden_field :disponibilidade_id, value: agendamento.disponibilidade_id %>
     </div>
-  <% end %>
-
-<div class="col-md-12">
-  <div class="form-group">
-    <%= form.hidden_field :disponibilidade_id, value: agendamento.disponibilidade_id %>
   </div>
-</div>
-
-
- <div class="form-row justify-content-center">
+  
+  <div class="form-row justify-content-center">
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :cliente_id, style: "display: block" %>
-        <%= form.collection_select :cliente_id, User.all, :id, :nome, { include_blank: true }, class: "form-control", disabled: !agendamento.new_record? %>
+        <%= form.collection_select :cliente_id, User.all, :id, :nome, { include_blank: true }, class: "form-control", disabled: true %>  <!-- Disabled para não editar -->
+        <%= form.hidden_field :cliente_id, value: agendamento.cliente_id %> <!-- Campo oculto para enviar o valor -->
       </div>
     </div>
-
+  
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :consultor_id, style: "display: block" %>
-        <%= form.collection_select :consultor_id, User.all, :id, :nome, { include_blank: true }, class: "form-control", disabled: !agendamento.new_record? %>
+        <%= form.collection_select :consultor_id, User.all, :id, :nome, { include_blank: true }, class: "form-control", disabled: true %> <!-- Disabled para não editar -->
+        <%= form.hidden_field :consultor_id, value: agendamento.consultor_id %> <!-- Campo oculto para enviar o valor -->
       </div>
     </div>
-
-
+  
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :data, style: "display: block" %>
-        <%= form.date_field :data, class: "form-control" %>
+        <%= form.date_field :data, class: "form-control", readonly: true %>  <!-- Readonly para não editar -->
+        <%= form.hidden_field :data, value: agendamento.data %> <!-- Campo oculto para enviar o valor -->
       </div>
     </div>
-
+  
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :hora_inicio, style: "display: block" %>
-        <%= form.time_field :hora_inicio, class: "form-control" %>
+        <%= form.time_field :hora_inicio, class: "form-control", readonly: true %> <!-- Readonly para não editar -->
+        <%= form.hidden_field :hora_inicio, value: agendamento.hora_inicio %> <!-- Campo oculto para enviar o valor -->
       </div>
     </div>
-
+  
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :hora_fim, style: "display: block" %>
-        <%= form.time_field :hora_fim, class: "form-control" %>
+        <%= form.time_field :hora_fim, class: "form-control", readonly: true %> <!-- Readonly para não editar -->
+        <%= form.hidden_field :hora_fim, value: agendamento.hora_fim %> <!-- Campo oculto para enviar o valor -->
       </div>
     </div>
   </div>
-
+  
   <div class="form-group mt-3">
     <div class="d-flex justify-content-between">
       <div>
@@ -65,4 +58,6 @@
       </div>
     </div>
   </div>
-<% end %>
+  
+  <% end %>
+  

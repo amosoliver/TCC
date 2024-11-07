@@ -1,17 +1,5 @@
 <%= form_with(model: cidade, local: true, class: "centered-form") do |form| %>
-  <% if cidade.errors.any? %>
-    <div class="alert alert-danger">
-      <h2><%= pluralize(cidade.errors.count, "error") %> prohibited this cidade from being saved:</h2>
-      <ul>
-        <% cidade.errors.full_messages.each do |error| %>
-          <li><%= error %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="form-row justify-content-center">
-
     <div class="col-md-12">
       <div class="form-group">
         <%= form.label :descricao, class: "form-label" %>
