@@ -1,4 +1,5 @@
-<% if !user_signed_in? || (user_signed_in? && !current_user.consultor?) %>
+<% if !user_signed_in? %>
+  <!-- Exibir tudo para usuários deslogados -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container">
       <div class="row">
@@ -17,7 +18,6 @@
   </section><!-- End Hero -->
 
   <main id="main">
-
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
@@ -54,5 +54,41 @@
         </div>
       </div>
     </section><!-- End Services Section -->
+  </main>
+
+<% elsif user_signed_in? && current_user.consultor? %>
+  <!-- Não exibir nada para consultores -->
+
+<% elsif user_signed_in? && !current_user.consultor? %>
+  <!-- Exibir tudo menos o Services Section para usuários logados não consultores -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+          <h1>O seu novo ​conceito em ​consultoria</h1>
+          <h2>Encontre profissionais e agende ​a sua consultoria de forma ​simples ​e fácil.</h2>
+          <div class="d-flex justify-content-center justify-content-lg-start">
+            <a href="#about" class="btn-get-started scrollto btn-lg">Conheça</a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+          <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Quem somos</h2>
+        </div>
+        <div class="row content">
+          <p class="fs-2 text-center">A ProXpert nasceu com a missão de transformar a ​maneira como as empresas acessam consultorias ​especializadas. Fundada por um grupo de profissionais ​com vasta experiência em diferentes setores, a ​empresa surgiu da visão de oferecer mais do que ​soluções convencionais — seu objetivo é inspirar ​mudanças reais, ajudando organizações a superar ​desafios e alcançar seu pleno potencial.</p>
+        </div>
+      </div>
+    </section><!-- End About Us Section -->
   </main>
 <% end %>

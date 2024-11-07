@@ -165,7 +165,6 @@ GEM
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pg (1.5.9)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
@@ -293,7 +292,6 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   net-pop
-  pg
   puma (>= 5.0)
   rails (~> 7.1.4)
   selenium-webdriver
@@ -305,7 +303,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.3.3p89
+   ruby 3.3.4p94
 
 BUNDLED WITH
    2.5.18

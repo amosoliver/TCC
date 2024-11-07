@@ -19,6 +19,21 @@
                 <%= agendamento.hora_inicio.strftime("%H:%M") %> - 
                 <%= agendamento.hora_fim.strftime("%H:%M") %>
               </p>
+
+              <% if agendamento.cancelado %>
+                <button class="btn btn-danger">Cancelado</button>
+              <% else %>
+                <% if current_user.consultor? && agendamento.consultor == current_user %>
+                  <!-- O consultor pode cancelar o agendamento -->
+                  <%= button_to 'Cancelar', agendamento_path(agendamento.id), method: :delete, data: { confirm: 'Tem certeza que deseja cancelar este agendamento?' }, class: 'btn btn-warning' %>
+                <% elsif !current_user.consultor? && agendamento.cliente == current_user %>
+                  <!-- O cliente pode cancelar o agendamento -->
+                  <%= button_to 'Cancelar', agendamento_path(agendamento.id), method: :delete, data: { confirm: 'Tem certeza que deseja cancelar este agendamento?' }, class: 'btn btn-warning' %>
+                <% end %>
+              <% end %>
+
+              <!-- Linha separadora usando Bootstrap -->
+              <hr class="my-3">
             <% end %>
           </div>
         </div>

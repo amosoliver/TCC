@@ -153,6 +153,7 @@ pt-BR:
               too_short: "deve ter pelo menos %{count} caracteres"
             password_confirmation:
               blank: "não pode ficar em branco"
+              confirmation: "A confirmação da senha não corresponde"
       messages:
         required: "é obrigatório"
         not_saved: "Não foi possível salvar %{resource}: %{errors}"

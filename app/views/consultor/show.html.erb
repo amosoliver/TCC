@@ -18,25 +18,32 @@
     <!-- Agrupa as disponibilidades por data -->
     <div class="row">
       <% @resultado.group_by { |item| item[:disponibilidade].data }.each do |data, horarios| %>
-        <div class="col-md-3 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
+        <div class="col-md-4 d-flex align-items-stretch mb-3" data-aos="zoom-in" data-aos-delay="100">
           <div class="icon-box-agendamento">
             <h4><%= data.strftime("%d/%m/%Y") %></h4>
 
             <% horarios.each do |item| %>
-              <p>
-                <strong><%= item[:disponibilidade].hora_inicio.strftime("%H:%M") %> às <%= item[:disponibilidade].hora_fim.strftime("%H:%M") %></strong>
+              <p class="d-flex flex-wrap">
+                <strong class="mr-2"><%= item[:disponibilidade].hora_inicio.strftime("%H:%M") %> às <%= item[:disponibilidade].hora_fim.strftime("%H:%M") %></strong>
                 
-                <% if item[:status] == 'Ocupado' %>
-                  <% if current_user.consultor %>
-                    <span class="btn btn-info btn-sm ml-2"><strong><%= item[:cliente]&.nome || 'Desconhecido' %></strong></span>
+                <% if item[:cancelado] %>
+                  <!-- Se o agendamento foi cancelado -->
+                  <span class="btn btn-warning btn-sm ml-2 d-inline-block"><strong>Cancelado</strong></span>
+                <% elsif item[:status] == 'Ocupado' %>
+                  <% if current_user.consultor  %>
+                    <!-- Exibe o nome do cliente somente se não estiver cancelado -->
+                    <span class="btn btn-info btn-sm ml-2 d-inline-block">
+                     <strong><%= item[:cancelado] ? 'Cancelado' : (item[:cliente]&.nome || 'Desconhecido') %></strong>
+                    </span>
                   <% elsif item[:cliente] && item[:cliente].id == current_user.id %>
-                    <span class="btn btn-success btn-sm ml-2"><strong><%= current_user.nome %></strong></span>
+                     <span class="btn btn-success btn-sm ml-2 d-inline-block"><strong><%= current_user.nome %></strong></span>
+                        <span class="btn btn-warning btn-sm ml-2 d-inline-block"><strong>Cancelado</strong></span>
                   <% else %>
-                    <span class="btn btn-danger btn-sm ml-2"><strong>Ocupado</strong></span>
+                    <span class="btn btn-danger btn-sm ml-2 d-inline-block"><strong>Ocupado</strong></span>
                   <% end %>
                 <% else %>
                   <% if current_user.consultor %>
-                    <span class="btn btn-success btn-sm ml-2">Vago</span>
+                    <span class="btn btn-success btn-sm ml-2 d-inline-block">Vago</span>
                   <% else %>
                     <%= link_to 'Agendar', new_agendamento_path(
                         disponibilidade_id: item[:disponibilidade].id,
@@ -45,7 +52,21 @@
                         hora_fim: item[:disponibilidade].hora_fim,
                         consultor_id: @consultor.id,
                         cliente_id: current_user.id
-                      ), class: 'btn btn-primary btn-sm ml-2' %>
+                      ), class: 'btn btn-primary btn-sm ml-2 d-inline-block' %>
+                  <% end %>
+                <% end %>
+
+                <!-- Exibe o ícone de lixo para cancelar, apenas se o agendamento não for "Vago" e o usuário for consultor -->
+                <% if item[:status] != 'Vago' && current_user.consultor %>
+                  <% agendamento = Agendamento.where(disponibilidade_id: item[:disponibilidade].id).first %>
+                  <% if agendamento %>
+                    <% if agendamento.cancelado %>
+                      <!-- Se o agendamento estiver cancelado, exibe a mensagem "Cancelado" -->
+                      <span class="btn btn-warning btn-sm ml-2 d-inline-block"><strong>Cancelado</strong></span>
+                    <% else %>
+                      <!-- Caso contrário, exibe o botão de excluir -->
+                      <%= button_to 'Excluir', agendamento_path(agendamento.id), method: :delete, data: { confirm: 'Tem certeza que deseja cancelar este agendamento?' }, class: 'btn btn-danger btn-sm ml-2 d-inline-block' %>
+                    <% end %>
                   <% end %>
                 <% end %>
               </p>

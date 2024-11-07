@@ -26,7 +26,7 @@
                   <% if current_user.consultor? %>
                     <%= button_to '<i class="bi bi-pencil"></i>'.html_safe, edit_disponibilidade_consultor_path(disponibilidade), method: :get, class: 'btn btn-primary btn-sm', title: 'Editar', form: { class: 'd-inline' } %>
                     
-                    <%= button_to '<i class="bi bi-trash"></i>'.html_safe, disponibilidade_consultor_path(disponibilidade), method: :delete, class: 'btn btn-danger btn-sm', title: 'Excluir', data: { confirm: 'Tem certeza que deseja excluir esta disponibilidade?' }, form: { class: 'd-inline' } %>
+
                   <% end %>
                 </div>
             <% end %>
