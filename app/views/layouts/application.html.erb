@@ -26,7 +26,19 @@
   
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Core Stylesheet -->
+
+  <% if current_user %>
+  <% if current_user.consultor == false %>
+    <link href="/css/style.css" rel="stylesheet">
+  <% else %>
+    <link href="/css/style-consultor.css" rel="stylesheet">
+    <!-- Exemplo: -->
+  <% end %>
+<% else %>
   <link href="/css/style.css" rel="stylesheet">
+<% end %>
+    <link href="/css/alternative-style.css" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
 
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
